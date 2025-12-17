@@ -1,0 +1,11 @@
+# For all text files, normalize line endings
+* text=auto
+
+# Ensure certain file types use LF (Linux/macOS style)
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.json text eol=lf
