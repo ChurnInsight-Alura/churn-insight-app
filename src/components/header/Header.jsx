@@ -3,18 +3,26 @@ import Footer from "../footer/Footer";
 
 export default function Header() {
   return (
-   <div className="flex flex-row min-h-dvh w-full">
-  <aside className="sticky top-0 h-screen w-64 bg-primary/20">
-    <nav className="flex items-center h-full justify-center"> 
-      <Link
+   <div className="flex flex-row flex-wrap min-h-dvh w-full">
+  <aside className="sticky top-0 h-20 w-screen bg-primary">
+    <nav className="flex items-center h-full justify-between text-white"> 
+      <div className="nav-container-left">
+        <Link
         to="/dashboard"
-        className="text-primary font-semibold hover:text-primary/70 transition-colors">
+        className="font-semibold px-5">
         Panel de Control
       </Link>
+      </div>
+      <div className="nav-container-right px-10">
+         <Link
+        to="/user"
+        className=" font-semibold">
+        User
+      </Link>
+      </div>
+      
     </nav>
   </aside>
-
-  
   <div className="flex flex-col flex-1">
     <main className="flex-1 p-5">
       <Outlet />
