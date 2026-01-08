@@ -1,35 +1,26 @@
 import { Outlet, Link } from "react-router-dom";
 import Footer from "../footer/Footer";
-
+import logo from "@/assets/img/logo-nobg.png";
 export default function Header() {
   return (
-   <div className="flex flex-row flex-wrap min-h-dvh w-full">
-  <aside className="sticky top-0 h-20 w-screen bg-primary">
-    <nav className="flex items-center h-full justify-between text-white"> 
-      <div className="nav-container-left">
-        <Link
-        to="/dashboard"
-        className="font-semibold px-5">
-        Panel de Control
-      </Link>
-      </div>
-      <div className="nav-container-right px-10">
-         <Link
-        to="/user"
-        className=" font-semibold">
-        User
-      </Link>
-      </div>
-      
-    </nav>
-  </aside>
-  <div className="flex flex-col flex-1">
-    <main className="flex-1 p-5">
-      <Outlet />
-    </main>
+    <div className="grid h-dvh w-full grid-rows-[auto_1fr_auto]">
+      <aside className="h-20 w-screen bg-primary sticky top-0">
+        <nav className="flex h-full items-center justify-between text-white">
+          <Link to="/dashboard" className="px-5 font-semibold">
+            <img src={logo} alt="Logo" className="h-16 sm:h-20 px-3 w-auto" />
+          </Link>
 
-    <Footer />
-  </div>
-</div>
+          <Link to="/user" className="px-10 font-semibold">
+            User
+          </Link>
+        </nav>
+      </aside>
+
+      <main className="overflow-y-auto p-5">
+        <Outlet />
+      </main>
+
+      <Footer />
+    </div>
   );
 }
