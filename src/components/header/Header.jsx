@@ -1,7 +1,13 @@
 import { Outlet, Link } from "react-router-dom";
 import Footer from "../footer/Footer";
 import logo from "@/assets/img/logo-nobg.png";
+import SearchCustomer from "../searchCustomer/SearchCustomer";
+import { useState } from "react";
+import { useDebounce } from "../../hooks/useDebounce";
 export default function Header() {
+  const [term, setTerm] = useState("");
+  const debouncedTerm = useDebounce(term, 2000);
+
   return (
     <div className="grid h-dvh w-full grid-rows-[auto_1fr_auto]">
       <aside className="h-20 w-screen bg-primary sticky top-0">
@@ -11,13 +17,13 @@ export default function Header() {
           </Link>
 
           <div className="flex items-center gap-5">
-            <Link
+            {/* <Link
               to="/user"
               className="hidden md:inline-block px-10 font-semibold md:text-xl"
             >
               ChurnInsight Prediction
-            </Link>
-
+            </Link> */}
+            <SearchCustomer term={term} setTerm={setTerm} />
             <div className="px-10 font-semibold flex items-center gap-2">
               <span className="w-10 h-10 inline-block">
                 <svg
@@ -40,7 +46,7 @@ export default function Header() {
       </aside>
 
       <main className="overflow-y-auto p-5">
-        <Outlet />
+        <Outlet context={{debouncedTerm}} />
       </main>
 
       <Footer />
