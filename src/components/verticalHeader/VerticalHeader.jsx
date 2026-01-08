@@ -8,7 +8,7 @@ export default function VerticalHeader() {
       <aside className="row-span-2 w-32 sm:w-64 bg-primary/20">
         <nav className="flex flex-col p-5 items-center h-full gap-2">
           <Link to="/" className="sm:px-5 font-semibold">
-                      <img src={logo} alt="Logo" className="h-16 sm:h-20 px-3 w-auto" />
+                      <img src={logo} alt="Logo" className="h-16 sm:h-20 sm:px-3 w-auto" />
           </Link>
           <Link
             to="/dashboard"
