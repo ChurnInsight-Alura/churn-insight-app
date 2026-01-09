@@ -17,7 +17,7 @@ function App() {
       <Route index element={<Home />} />
       </Route>
       <Route path="/dashboard" element={<VerticalHeader/>}>
-      <Route index element={<Home />} />
+      <Route index element={<h1>Aqui ira la vista UwU</h1>} />
       </Route>
       <Route path="*" element={<h1>Not found</h1>} />
       </Routes>
