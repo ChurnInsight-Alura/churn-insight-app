@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useOutletContext } from "react-router-dom";
 import { fetchCustomerById } from "../../api/client";
+import PredictionDetail from "../predictionDetail/PredictionDetail";
 
 // async function fetchCustomerById(id) {
 //   const response = await fetch(`/integration/${id}`, {
@@ -58,11 +59,7 @@ export default function CustomerPrediction() {
 
       {data && (
         <div className="flex w-full justify-center">
-          <div className="max-w-2xl bg-white shadow rounded-lg p-6">
-            <h4 className="font-mono text-sm break-all">
-              {JSON.stringify(data, null, 2)}
-            </h4>
-          </div>
+         <PredictionDetail  data={data}/>
         </div>
       )}
     </div>
