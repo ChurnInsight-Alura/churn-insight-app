@@ -37,6 +37,10 @@ export default function UserMenu() {
           <div className="px-4 py-2 border-b border-slate-100">
             <p className="text-xs text-slate-400 font-bold uppercase">Configuración</p>
           </div>
+           <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/">
+            Home
+          </Link>
+
           <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/dashboard">
             Dashboard
           </Link>
