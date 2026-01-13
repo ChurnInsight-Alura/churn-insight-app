@@ -1,10 +1,8 @@
 
 import EngagementStrat from "../engagementStrat/EngagementStrat";
-import { useOutletContext } from "react-router-dom";
 import useCustomerPredict from "../../hooks/useCustomerPredict";
 
-export default function EngagementStrats() {
-  const { debouncedTerm } = useOutletContext();
+export default function EngagementStrats({debouncedTerm}) {
   const { data, isError } = useCustomerPredict(debouncedTerm);
 
 

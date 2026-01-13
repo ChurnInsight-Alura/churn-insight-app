@@ -1,6 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import { useOutletContext } from "react-router-dom";
-import { fetchCustomerById } from "../../api/client";
+
 import PredictionDetail from "../predictionDetail/PredictionDetail";
 import useCustomerPredict from "../../hooks/useCustomerPredict";
 
@@ -13,8 +11,7 @@ import useCustomerPredict from "../../hooks/useCustomerPredict";
 //   return response.json;
 // }
 
-export default function CustomerPrediction() {
-  const { debouncedTerm } = useOutletContext();
+export default function CustomerPrediction({debouncedTerm}) {
   const {isLoading,isFetched,data} = useCustomerPredict(debouncedTerm)
 
   return (
