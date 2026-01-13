@@ -9,7 +9,6 @@ import { ResponsiveBar } from "@nivo/bar";
 
 export function BarChart({ data }) {
   return (
-    
     <ResponsiveBar
       data={data}
           keys={['alcanzado', 'restante']}

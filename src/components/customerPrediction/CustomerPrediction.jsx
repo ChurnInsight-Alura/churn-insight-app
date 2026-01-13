@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useOutletContext } from "react-router-dom";
 import { fetchCustomerById } from "../../api/client";
 import PredictionDetail from "../predictionDetail/PredictionDetail";
+import useCustomerPredict from "../../hooks/useCustomerPredict";
 
 // async function fetchCustomerById(id) {
 //   const response = await fetch(`/integration/${id}`, {
@@ -14,11 +15,7 @@ import PredictionDetail from "../predictionDetail/PredictionDetail";
 
 export default function CustomerPrediction() {
   const { debouncedTerm } = useOutletContext();
-  const { data, isLoading, isFetched } = useQuery({
-    queryKey: ["customer", debouncedTerm],
-    queryFn: () => fetchCustomerById(debouncedTerm),
-    enabled: (debouncedTerm || "").length >= 1,
-  });
+  const {isLoading,isFetched,data} = useCustomerPredict(debouncedTerm)
 
   return (
     <div className="w-full h-full flex items-center">
@@ -59,7 +56,7 @@ export default function CustomerPrediction() {
 
       {data && (
         <div className="flex w-full justify-center">
-         <PredictionDetail  data={data}/>
+         <PredictionDetail  data={data} id={debouncedTerm}/>
         </div>
       )}
     </div>

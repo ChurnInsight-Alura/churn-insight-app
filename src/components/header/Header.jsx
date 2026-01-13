@@ -4,32 +4,37 @@ import logo from "@/assets/img/logo-nobg.png";
 import SearchCustomer from "../searchCustomer/SearchCustomer";
 import { useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
+import UserMenu from "../userMenu/userMenu";
 export default function Header() {
   const [term, setTerm] = useState("");
   const debouncedTerm = useDebounce(term, 2000);
 
   return (
-    <div className="grid h-dvh w-full grid-rows-[auto_1fr_auto]">
-      <aside className="h-20 w-screen bg-primary sticky top-0">
-        <nav className="flex h-full items-center justify-between text-white">
-          <Link to="/dashboard" className="px-5 font-semibold">
-            <img src={logo} alt="Logo" className="h-16 sm:h-20 px-3 w-auto" />
+    <div className="grid h-dvh w-full grid-rows-[auto_1fr_auto] overflow-hidden">
+
+      <header className="sticky top-0 z-50 h-auto md:h-20 w-full bg-primary shadow-lg overflow-visible">
+        <nav className="flex h-full flex-wrap items-center justify-between px-4 py-2 text-white md:flex-nowrap md:px-10">
+          
+          <Link to="/dashboard" className="shrink-0">
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-12 w-auto sm:h-16 md:h-20"
+            />
           </Link>
 
-          <div className="flex items-center gap-5">
-            {/* <Link
-              to="/user"
-              className="hidden md:inline-block px-10 font-semibold md:text-xl"
-            >
-              ChurnInsight Prediction
-            </Link> */}
-            <SearchCustomer term={term} setTerm={setTerm} />
-            <div className="px-10 font-semibold flex items-center gap-2">
-              <span className="w-10 h-10 inline-block">
+          <div className="flex flex-1 items-center justify-end gap-3 md:gap-8">
+     
+            <div className="w-full max-w-37.5 sm:max-w-md">
+              <SearchCustomer term={term} setTerm={setTerm} />
+            </div>
+            <UserMenu />
+            {/* <div className="flex items-center gap-2 font-semibold shrink-0">
+              <span className="inline-block h-8 w-8 md:h-10 md:w-10">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
-                  className="w-full h-full"
+                  className="h-full w-full"
                   viewBox="0 0 16 16"
                 >
                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
@@ -39,14 +44,16 @@ export default function Header() {
                   />
                 </svg>
               </span>
-              User
-            </div>
+              <span className="hidden sm:inline italic opacity-90">User</span>
+            </div> */}
           </div>
         </nav>
-      </aside>
+      </header>
 
-      <main className="overflow-y-auto p-5">
-        <Outlet context={{debouncedTerm}} />
+      <main className="overflow-y-auto  p-4 md:p-8 flex flex-col">
+        <div className="mx-auto max-w-8xl w-full flex-1 flex flex-col">
+          <Outlet context={{ debouncedTerm }} />
+        </div>
       </main>
 
       <Footer />

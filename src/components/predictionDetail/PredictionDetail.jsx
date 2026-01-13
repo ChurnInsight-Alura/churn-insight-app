@@ -1,6 +1,6 @@
 import { BarChart } from "../barChart/BarChart";
 
-export default function PredictionDetail({ data }) {
+export default function PredictionDetail({ data,id }) {
   const labels = {
     1: "Si",
     0: "No",
@@ -10,32 +10,32 @@ export default function PredictionDetail({ data }) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
   console.log(data);
-  const CustomerId =
-    data?.CustomerSegment != null ? data.CustomerId : "No info";
+  const CustomerId = id;
   const PredictedProba =
-    data?.PredictedProba != null
-      ? Math.trunc(data.PredictedProba * 1000) / 10 + "%"
+    data?.predictedProba != null
+      ? Math.trunc(data.predictedProba * 1000) / 10 + "%"
       : "No info";
-  const PredictedLabel = labels[data?.PredictedLabel] ?? "No info";
-  const CustomerSegment = data?.CustomerSegment
-    ? data.CustomerSegment.toUpperCase()
+  const PredictedLabel = labels[data?.predictedLabel] ?? "No info";
+  const CustomerSegment = data?.customerSegment
+    ? data.customerSegment.toUpperCase()
     : "No info";
-  const InterventionPriority = capitalize(data?.InterventionPriority);
+  const InterventionPriority = capitalize(data?.interventionPriority);
 
   const probaF = parseFloat(PredictedProba);
 
-  const chartData = [
-    {
-      id: "risk",
-      alcanzado: probaF,
-      restante: Math.max(0, 100 - probaF),
-    },
-  ];
+  const chartData = !Number.isNaN(probaF) ? [
+  {
+    id: "risk",
+    alcanzado: probaF,
+    restante: Math.max(0, 100 - probaF),
+  },
+] : null;
+  
   return (
     <div className="w-full flex flex-col font-medium gap-5">
 
       <div className="customer-id">
-        <h1 className="text-2xl">{CustomerId}</h1>
+        <h1 className="text-2xl flex gap-2"><span>Customer Id:</span><span>{CustomerId}</span></h1>
       </div>
 
       <div className="stats-container grid sm:grid-cols-2 grid-cols-1 bg-white shadow rounded-lg  divide-x divide-gray-300 ">
@@ -60,7 +60,7 @@ export default function PredictionDetail({ data }) {
         <div className="chart-container flex flex-col gap-3 p-6">
           <h1 className=" text-lg ">Nivel de riesgo de Churn</h1>
           <div className="h-10 w-full">
-            <BarChart data={chartData} />
+            {chartData  ? <BarChart data={chartData} />: "No info"}
           </div>
         </div>
       </div>
