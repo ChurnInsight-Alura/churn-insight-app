@@ -9,7 +9,8 @@ import SearchCustomer from "../searchCustomer/SearchCustomer";
 import SearchBar from "../searchBar/SearchBar";
 export default function Header() {
   const [term, setTerm] = useState("");
-  const debouncedTerm = useDebounce(term, 2000);
+  const [time, setTime] = useState(1000);
+  const debouncedTerm = useDebounce(term, time);
 
   return (
     <div className="grid h-dvh w-full grid-rows-[auto_1fr_auto] overflow-hidden">
@@ -25,9 +26,9 @@ export default function Header() {
 
           <div className="flex flex-1 items-center justify-end gap-3 md:gap-8">
             <div className="w-full max-w-37.5 sm:max-w-md">
-              <SearchBar term={term} setTerm={setTerm} />
+              <SearchBar term={term} setTerm={setTerm} setTime={setTime}/>
             </div>
-            <UserMenu />
+            <UserMenu  setTerm={setTerm} setTime={setTime}/>
           </div>
         </nav>
       </header>

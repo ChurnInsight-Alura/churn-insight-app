@@ -1,6 +1,6 @@
 
 
-export default function SearchBar({term,setTerm}) {
+export default function SearchBar({term,setTerm,setTime}) {
 
   return (
     <>
@@ -28,7 +28,7 @@ export default function SearchBar({term,setTerm}) {
                text-sm text-gray-900 transition-all
                focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/10"
           placeholder="Buscar cliente por id..."
-          onChange={(e)=>{setTerm(e.target.value)}}/>
+          onChange={(e)=>{setTerm(e.target.value);setTime(1000)}}/>
       </div>
     </>
   );

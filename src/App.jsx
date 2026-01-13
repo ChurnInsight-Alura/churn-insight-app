@@ -2,7 +2,7 @@
 import { Routes,Route } from 'react-router-dom'
 import './App.css'
 import Home from './layout/home/home'
-import Header from './components/header/header'
+import Header from './components/header/Header'
 import VerticalHeader from './components/verticalHeader/VerticalHeader'
 import Dashboard from '@/layout/dashboard/Dashboard'
 import { QueryClientProvider,QueryClient } from '@tanstack/react-query'
