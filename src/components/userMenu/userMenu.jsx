@@ -46,16 +46,15 @@ export default function UserMenu({setTerm,setTime}) {
            <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/" onClick={handleNavigate}>
             Home
           </Link>
-
+           <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/search" onClick={handleNavigate}>
+            Buscar Cliente
+          </Link>
           <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/dashboard" onClick={handleNavigate}>
             Dashboard
           </Link>
-          <button className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
+          <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/profile" onClick={handleNavigate}>
             Mi Perfil
-          </button>
-          <button className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
-            Ajustes
-          </button>
+          </Link>
           <hr className="my-1 border-slate-100" />
           <button className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium transition-colors">
             Cerrar Sesión
