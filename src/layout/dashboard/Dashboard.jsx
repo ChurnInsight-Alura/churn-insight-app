@@ -48,29 +48,15 @@ export default function Dashboard() {
       </div>
 
       {/* ROW 3: CUADRADO 5, 6, 7 | CUADRADO 8, 9, 10 */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
         {/* LEFT COLUMN: TRANSACCIONES */}
         <div className="space-y-4 sm:space-y-6">
           {/* CUADRADO 5: Velocímetro Transacciones */}
           <GaugeSpeedometer
             value={data?.transactions?.AvgTxRateChange || 0}
             threshold={data?.transactions?.threshold || -0.22}
-            title="Promedio Tasa de Cambio Q2 → Q3\nVolumen Transacciones"
+            title="Promedio Tasa de Cambio Q2 → Q3 <br/> Volumen Transacciones"
           />
-          
-          {/* CUADRADO 6 y 7: Tarjetas horizontales */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <MetricCard
-              label="Promedio\nDías sin transacciones"
-              value={data?.avgTxDaysSinceLast || 0}
-              unit="días"
-            />
-            <MetricCard
-              label="Desviación Estándar\nDías sin transacciones"
-              value={data?.stdTxDaysSinceLast || 0}
-              unit="días"
-            />
-          </div>
         </div>
 
         {/* RIGHT COLUMN: SESIONES */}
@@ -79,22 +65,35 @@ export default function Dashboard() {
           <GaugeSpeedometer
             value={data?.sessions?.AvgSsRateChange || 0}
             threshold={data?.sessions?.threshold || -0.28}
-            title="Promedio Tasa de Cambio Q2 → Q3\nVolumen Sesiones"
+            title="Promedio Tasa de Cambio Q2 → Q3 <br />Volumen Sesiones"
           />
-          
-          {/* CUADRADO 9 y 10: Tarjetas horizontales */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <MetricCard
-              label="Promedio\nDías sin sesiones"
-              value={data?.avgSsDaysSinceLast || 0}
-              unit="días"
-            />
-            <MetricCard
-              label="Desviación Estándar\nDías sin sesiones"
-              value={data?.stdSsDaysSinceLast || 0}
-              unit="días"
-            />
-          </div>
+        </div>
+      </div>
+
+      {/* ROW 4: CUADRADOS 6, 7, 9, 10 - MÉTRICAS */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow-md p-5 h-40 flex flex-col items-center justify-center text-center border-l-4 border-blue-500">
+          <p className="text-xs text-gray-600 font-medium mb-2 whitespace-pre-wrap">Promedio<br/>Días sin transacciones</p>
+          <span className="text-3xl font-bold text-gray-900">{(data?.avgTxDaysSinceLast || 0).toFixed(1)}</span>
+          <span className="text-xs text-gray-600 mt-1">días</span>
+        </div>
+
+        <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg shadow-md p-5 h-40 flex flex-col items-center justify-center text-center border-l-4 border-orange-500">
+          <p className="text-xs text-gray-600 font-medium mb-2 whitespace-pre-wrap">Desviación Estándar <br/> Días sin transacciones</p>
+          <span className="text-3xl font-bold text-gray-900">{(data?.stdTxDaysSinceLast || 0).toFixed(1)}</span>
+          <span className="text-xs text-gray-600 mt-1">días</span>
+        </div>
+
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow-md p-5 h-40 flex flex-col items-center justify-center text-center border-l-4 border-green-500">
+          <p className="text-xs text-gray-600 font-medium mb-2 whitespace-pre-wrap">Promedio <br />Días sin sesiones</p>
+          <span className="text-3xl font-bold text-gray-900">{(data?.avgSsDaysSinceLast || 0).toFixed(1)}</span>
+          <span className="text-xs text-gray-600 mt-1">días</span>
+        </div>
+
+        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg shadow-md p-5 h-40 flex flex-col items-center justify-center text-center border-l-4 border-purple-500">
+          <p className="text-xs text-gray-600 font-medium mb-2 whitespace-pre-wrap">Desviación Estándar <br /> Días sin sesiones</p>
+          <span className="text-3xl font-bold text-gray-900">{(data?.stdSsDaysSinceLast || 0).toFixed(1)}</span>
+          <span className="text-xs text-gray-600 mt-1">días</span>
         </div>
       </div>
     </div>
