@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from "react-router-dom";
-export default function UserMenu() {
+export default function UserMenu({setTerm,setTime}) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -14,6 +14,12 @@ export default function UserMenu() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  function handleNavigate() {
+    setTerm("")
+    setTime(0);
+    setIsOpen(false);
+  }
 
   return (
     <div className="relative" ref={menuRef}>
@@ -37,19 +43,18 @@ export default function UserMenu() {
           <div className="px-4 py-2 border-b border-slate-100">
             <p className="text-xs text-slate-400 font-bold uppercase">Configuración</p>
           </div>
-           <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/">
+           <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/" onClick={handleNavigate}>
             Home
           </Link>
-
-          <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/dashboard">
+           <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/search" onClick={handleNavigate}>
+            Buscar Cliente
+          </Link>
+          <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/dashboard" onClick={handleNavigate}>
             Dashboard
           </Link>
-          <button className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
+          <Link className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors" to="/profile" onClick={handleNavigate}>
             Mi Perfil
-          </button>
-          <button className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
-            Ajustes
-          </button>
+          </Link>
           <hr className="my-1 border-slate-100" />
           <button className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium transition-colors">
             Cerrar Sesión

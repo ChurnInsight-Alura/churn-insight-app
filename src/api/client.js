@@ -18,7 +18,6 @@ export const fetchCustomerById = async (id) => {
     const { data } = await apiClient.post(`/integration/${id}`,{});
     return data;
   } catch (error) {
-    console.error(`Error fetching customer ${id}:`, error.response?.data || error.message);
     throw error;
   }
 };

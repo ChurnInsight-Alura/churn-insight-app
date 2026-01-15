@@ -9,7 +9,7 @@ export function DonutChurnChart({ data = {} }) {
       <h3 className="text-lg font-semibold text-gray-900 mb-8 w-full">Pérdida Potencial Estimada</h3>
       
       {/* Donut Chart */}
-      <div className="relative w-48 h-48 mb-8">
+      <div className="relative w-56 h-56 mb-8">
         <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
           {/* Green segment */}
           <circle
@@ -18,7 +18,7 @@ export function DonutChurnChart({ data = {} }) {
             r="30"
             fill="none"
             stroke="#007789"
-            strokeWidth="15"
+            strokeWidth="20"
             strokeDasharray={`${greenPercent * 1.88} 188`}
             strokeLinecap="round"
           />
@@ -29,7 +29,7 @@ export function DonutChurnChart({ data = {} }) {
             r="30"
             fill="none"
             stroke="#ff7b00"
-            strokeWidth="15"
+            strokeWidth="20"
             strokeDasharray={`${redPercent * 1.88} 188`}
             strokeDashoffset={`-${greenPercent * 1.88}`}
             strokeLinecap="round"
@@ -37,7 +37,7 @@ export function DonutChurnChart({ data = {} }) {
         </svg>
         {/* Center text */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-sm font-semibold text-gray-700">{greenPercent.toFixed(0)}%</span>
+          <span className="text-lg font-bold text-gray-700">{greenPercent.toFixed(0)}%</span>
         </div>
       </div>
 
