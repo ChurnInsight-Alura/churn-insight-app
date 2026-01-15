@@ -1,6 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import Footer from "../footer/Footer";
-import logo from "@/assets/img/logo-nobg.png";
+import logo from "@/assets/img/logo.png";
 
 import { useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
@@ -20,7 +20,7 @@ export default function Header() {
             <img
               src={logo}
               alt="Logo"
-              className="h-12 w-auto sm:h-16 md:h-20"
+              className="h-18 w-auto sm:h-20 md:h-28"
             />
           </Link>
 

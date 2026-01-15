@@ -15,7 +15,7 @@ const apiClient = axios.create({
 export const fetchCustomerById = async (id) => {
   try {
     
-    const { data } = await apiClient.post(`/integration/${id}`,{});
+    const { data } = await apiClient.post(`/predict/integration/${id}`,{});
     return data;
   } catch (error) {
     console.error(`Error fetching customer ${id}:`, error.response?.data || error.message);

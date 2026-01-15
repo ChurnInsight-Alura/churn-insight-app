@@ -58,13 +58,13 @@ export default function UserMenu({ setTerm, setTime }) {
 
       {/* DROPDOWN - Sobresale de la barra */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl py-2 z-100 border border-slate-100 animate-in fade-in zoom-in duration-100 pointer-events-auto ">
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl py-2 z-100 border border-slate-100 animate-in fade-in zoom-in duration-100 pointer-events-auto">
           <div className="px-4 py-2 border-b border-slate-100">
-            <p className="text-xs text-slate-400 font-bold uppercase">Configuración</p>
+            <p className="text-xs text-slate-400 font-bold uppercase text-left">Menú</p>
           </div>
 
           <Link
-            className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+            className="block w-full text-left  px-4 py-2  text-slate-700 text-sm hover:bg-slate-50 transition-colors tracking-wider"
             to="/"
             onClick={handleNavigate}
           >
@@ -72,7 +72,7 @@ export default function UserMenu({ setTerm, setTime }) {
           </Link>
 
           <Link
-            className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+            className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors tracking-wider"
             to="/search"
             onClick={handleNavigate}
           >
@@ -81,7 +81,7 @@ export default function UserMenu({ setTerm, setTime }) {
 
           {user?.role === "admin" && (
           <Link
-            className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+            className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors tracking-wider"
             to="/dashboard"
             onClick={handleNavigate}
           >
@@ -91,7 +91,7 @@ export default function UserMenu({ setTerm, setTime }) {
 
 
           <Link
-            className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+            className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors tracking-wider"
             to="/profile"
             onClick={handleNavigate}
           >
@@ -102,7 +102,7 @@ export default function UserMenu({ setTerm, setTime }) {
 
           <button
             onClick={handleLogout}
-            className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium transition-colors"
+            className="w-full  px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium transition-colors"
           >
             Cerrar Sesión
           </button>

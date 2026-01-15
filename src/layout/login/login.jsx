@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/auth";
-import logo from "@/assets/img/logo-nobg.png";
+import logo from "@/assets/img/logo.png";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -46,13 +46,13 @@ export default function Login() {
         <div className="w-full max-w-lg rounded-2xl border border-slate-100 bg-white shadow-[0_12px_30px_rgba(0,26,55,0.18)] overflow-hidden">
           
           <div className="px-6 pt-6">
-            <div className="flex items-center gap-3">
-              <img src={logo} alt="CusTech" className="h-10 w-auto" />
+            <div className="flex items-center gap-3 justify-between px-8">
               <div>
                 <h1 className="text-2xl font-extrabold text-[#001a37] leading-tight">
                   Login
                 </h1>
               </div>
+              <img src={logo} alt="CusTech" className="h-20 w-auto" />
             </div>
 
           </div>
