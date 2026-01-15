@@ -74,6 +74,41 @@ export const handlers = [
     await delay(500);
     return HttpResponse.json(mockDashboardData);
   }),
+  http.post("*/predict/integration/batch/pro/all", async () => {
+    await delay(500);
+    // Devolver datos reales del batch
+    return HttpResponse.json({
+      bucketDate: "2026-01-01",
+      batchRunId: 2,
+      batchHash: "7e979f2821893caa20cf6459e06f79c155d2d1d6800188bbdf84c570d7bc0f5d",
+      stats: {
+        QtyLow: 8,
+        DonutRed: 4,
+        DonutGreen: 8,
+        QtyCritical: 0,
+        ChurnersSpain: 0,
+        ChurnersFrance: 1,
+        "QtyMedium-Mail": 0,
+        AvgSsRateChange: 0.5,
+        AvgTxRateChange: 1.1667,
+        ChurnersGermany: 3,
+        CustomerChurnProp: 33.33,
+        "QtyHigh-Incentive": 2,
+        "QtyMedium-Monitor": 2,
+        AvgSsDaysSinceLast: 504.17,
+        AvgTxDaysSinceLast: 505.17,
+        StdSsDaysSinceLast: 516.84,
+        StdTxDaysSinceLast: 515.8,
+        ChurnersTotalBalance: 490002.0,
+        "QtyHigh-Personalized": 0,
+        QtyIsActiveMemberExit_0: 5,
+        QtyIsActiveMemberExit_1: 4,
+        QtyIsNOTActiveMemberExit_0: 3,
+        QtyIsNOTActiveMemberExit_1: 0
+      },
+      predictions: []
+    });
+  }),
   http.post("*/integration/:id", async ({ params }) => {
     await delay(800);
     // Aquí devuelves tu JSON estructurado

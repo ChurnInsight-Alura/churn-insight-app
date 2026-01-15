@@ -1,9 +1,9 @@
 export function ActiveMembersChart({ data = {} }) {
   const { active = {}, inactive = {} } = data;
-  const activeExit0 = active.exit0 || 0;
-  const activeExit1 = active.exit1 || 0;
-  const inactiveExit0 = inactive.exit0 || 0;
-  const inactiveExit1 = inactive.exit1 || 0;
+  const activeExit0 = active.QtyIsActiveMemberExit_0 || 0;
+  const activeExit1 = active.QtyIsActiveMemberExit_1 || 0;
+  const inactiveExit0 = inactive.QtyIsNOTActiveMemberExit_0 || 0;
+  const inactiveExit1 = inactive.QtyIsNOTActiveMemberExit_1 || 0;
 
   const maxValue = Math.max(activeExit0, activeExit1, inactiveExit0, inactiveExit1);
   const scale = maxValue > 0 ? 180 / maxValue : 1;

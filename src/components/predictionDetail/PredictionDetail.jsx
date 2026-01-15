@@ -9,7 +9,6 @@ export default function PredictionDetail({ data,id }) {
     if (!str) return "No info";
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
-  console.log(data);
   const CustomerId = id;
   const PredictedProba =
     data?.predictedProba != null

@@ -74,25 +74,25 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow-md p-5 h-40 flex flex-col items-center justify-center text-center border-l-4 border-blue-500">
           <p className="text-xs text-gray-600 font-medium mb-2 whitespace-pre-wrap">Promedio<br/>Días sin transacciones</p>
-          <span className="text-3xl font-bold text-gray-900">{(data?.avgTxDaysSinceLast || 0).toFixed(1)}</span>
+          <span className="text-3xl font-bold text-gray-900">{(data?.AvgTxDaysSinceLast || 0).toFixed(1)}</span>
           <span className="text-xs text-gray-600 mt-1">días</span>
         </div>
 
         <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg shadow-md p-5 h-40 flex flex-col items-center justify-center text-center border-l-4 border-orange-500">
           <p className="text-xs text-gray-600 font-medium mb-2 whitespace-pre-wrap">Desviación Estándar <br/> Días sin transacciones</p>
-          <span className="text-3xl font-bold text-gray-900">{(data?.stdTxDaysSinceLast || 0).toFixed(1)}</span>
+          <span className="text-3xl font-bold text-gray-900">{(data?.StdTxDaysSinceLast || 0).toFixed(1)}</span>
           <span className="text-xs text-gray-600 mt-1">días</span>
         </div>
 
         <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow-md p-5 h-40 flex flex-col items-center justify-center text-center border-l-4 border-green-500">
           <p className="text-xs text-gray-600 font-medium mb-2 whitespace-pre-wrap">Promedio <br />Días sin sesiones</p>
-          <span className="text-3xl font-bold text-gray-900">{(data?.avgSsDaysSinceLast || 0).toFixed(1)}</span>
+          <span className="text-3xl font-bold text-gray-900">{(data?.AvgSsDaysSinceLast || 0).toFixed(1)}</span>
           <span className="text-xs text-gray-600 mt-1">días</span>
         </div>
 
         <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg shadow-md p-5 h-40 flex flex-col items-center justify-center text-center border-l-4 border-purple-500">
           <p className="text-xs text-gray-600 font-medium mb-2 whitespace-pre-wrap">Desviación Estándar <br /> Días sin sesiones</p>
-          <span className="text-3xl font-bold text-gray-900">{(data?.stdSsDaysSinceLast || 0).toFixed(1)}</span>
+          <span className="text-3xl font-bold text-gray-900">{(data?.StdSsDaysSinceLast || 0).toFixed(1)}</span>
           <span className="text-xs text-gray-600 mt-1">días</span>
         </div>
       </div>

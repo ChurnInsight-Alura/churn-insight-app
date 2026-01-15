@@ -3,10 +3,10 @@
 export function InterventionBarChart({ data }) {
   const chartData = [
     { label: "Crítica", value: data.QtyCritical, color: "#7a1c00" },
-    { label: "Alta - Personalizado", value: data.QtyHighPersonalized, color: "#ff7b00" },
-    { label: "Alta - Incentivo", value: data.QtyHighIncentive, color: "#007789" },
-    { label: "Media - Email", value: data.QtyMediumMail, color: "#66c2a5" },
-    { label: "Media - Monitorear", value: data.QtyMediumMonitor, color: "#3288bd" },
+    { label: "Alta - Personalizado", value: data["QtyHighPersonalized"], color: "#ff7b00" },
+    { label: "Alta - Incentivo", value: data["QtyHighIncentive"], color: "#007789" },
+    { label: "Media - Email", value: data["QtyMediumMail"], color: "#66c2a5" },
+    { label: "Media - Monitorear", value: data["QtyMediumMonitor"], color: "#3288bd" },
     { label: "Baja", value: data.QtyLow, color: "#5e4fa2" },
   ]
 

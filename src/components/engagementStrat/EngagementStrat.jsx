@@ -1,7 +1,6 @@
 export default function EngagementStrat({ strat, week }) {
   const text = strat;
   const lineas = text.split("\n");
-  console.log(lineas);
   
   return (
     <div className="strat-container flex flex-col bg-white  p-4 rounded-2xl gap-2 min-h-60 max-h-60 ">
