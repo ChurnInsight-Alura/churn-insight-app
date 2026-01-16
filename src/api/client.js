@@ -23,4 +23,14 @@ export const fetchCustomerById = async (id) => {
   }
 };
 
+export const fetchDashboardData = async () => {
+  try {
+    const { data } = await apiClient.post('/predict/integration/batch/pro/all', {})
+    return data
+  } catch (error) {
+    console.error(`Error fetching Dashboard:`, error.response?.data || error.message);
+    throw error
+  }
+}
+
 export default apiClient;

@@ -1,15 +1,16 @@
-import { useDashboard } from "../../hooks/useDashboard"
+
 import { InterventionPriorityChart } from "../../components/charts/InterventionPriorityChart"
 import { DonutChurnChart } from "../../components/charts/DonutChurnChart"
 import { ActiveMembersChart } from "../../components/charts/ActiveMembersChart"
 import { GeoChurnHeatmap } from "../../components/charts/GeoChurnHeatmap"
 import { GaugeSpeedometer } from "../../components/charts/GaugeSpeedometer"
 import { MetricCard } from "../../components/charts/MetricCard"
+import useBatch from "../../hooks/useBatch"
 
 export default function Dashboard() {
-  const { data, loading, error } = useDashboard()
+  const { data, isLoading, error } = useBatch()
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-lg text-gray-600">Cargando dashboard...</div>
