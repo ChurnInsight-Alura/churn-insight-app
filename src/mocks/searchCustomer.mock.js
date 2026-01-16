@@ -1,5 +1,7 @@
-export const customer = {
-      predictedProba: Math.random(),
+
+export function customer(){
+  return {
+      predictedProba: (Math.floor(Math.random() * 100) + 1),
       predictedLabel: 1,
       customerSegment: "VIP",
       interventionPriority:
@@ -22,4 +24,4 @@ export const customer = {
           "Bonificación por contratación del primer producto (ej. exención de comisión en la tarjeta de crédito por un año) o asesoramiento financiero personalizado gratuito.",
       },
       aiInsightStatus: "OK",
-    }
+    }}

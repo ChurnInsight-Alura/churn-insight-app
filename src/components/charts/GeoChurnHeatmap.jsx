@@ -10,10 +10,12 @@ export function GeoChurnHeatmap({ data = {} }) {
   const gChurn = data?.ChurnersGermany ?? data?.churnersGermany ?? 0;
   const sChurn = data?.ChurnersSpain ?? data?.churnersSpain ?? 0;
   const fChurn = data?.ChurnersFrance ?? data?.churnersFrance ?? 0;
-
+  
   useEffect(() => {
-    if (!chartRef.current) return;
+  if (!chartRef.current) return;
 
+  // Usamos un pequeño delay (50ms) para garantizar que el contenedor esté listo
+  const renderTimeout = setTimeout(() => {
     // --- ROOT ---
     const root = am5.Root.new(chartRef.current);
     root.setThemes([am5themes_Animated.new(root)]);
@@ -26,28 +28,20 @@ export function GeoChurnHeatmap({ data = {} }) {
         projection: am5map.geoMercator(),
         homeGeoPoint: { latitude: 48, longitude: 6 },
         homeZoomLevel: 4.5,
-       wheelY: "zoom",      // ZOOM CON RUEDA DEL RATÓN
-        pinchZoom: true,     // ZOOM TÁCTIL
-        
+        wheelY: "zoom",      // ZOOM CON RUEDA DEL RATÓN
+        wheelSensitivity: 0.7, // Ajuste de sensibilidad para que se sienta fluido
+        pinchZoom: true      // ZOOM TÁCTIL
       })
     );
-    setTimeout(() => {
-    if (!root.isDisposed()) {
-      chart.zoomToGeoPoint({ latitude: 47, longitude: 5 }, 5, true);
-    }
-  }, 200);
-    // --- ZOOM CONTROL ---
-    // const zoomControl = chart.set(
-    //   "zoomControl",
-    //   am5map.ZoomControl.new(root, {
-    //     centerX: am5.p100,
-    //     x: am5.p100,
-    //     paddingRight: 20
-    //   })
-    // );
-    // zoomControl.homeButton.set("visible", true);
 
-    // --- POLYGON SERIES (mapa de fondo) ---
+    // --- FORZAR ZOOM INICIAL (200ms adicionales después de crear el chart) ---
+    setTimeout(() => {
+      if (!root.isDisposed()) {
+        chart.zoomToGeoPoint({ latitude: 47, longitude: 5 }, 5, true);
+      }
+    }, 200);
+
+    // --- POLYGON SERIES ---
     const polygonSeries = chart.series.push(
       am5map.MapPolygonSeries.new(root, {
         geoJSON: am5geodata_worldLow,
@@ -59,7 +53,6 @@ export function GeoChurnHeatmap({ data = {} }) {
       fill: am5.color(0xecf0f1),
       stroke: am5.color(0xbdc3c7),
       interactive: true,
-      // tooltipText: "{name}",
       cursorOverStyle: "pointer"
     });
 
@@ -73,10 +66,10 @@ export function GeoChurnHeatmap({ data = {} }) {
         calculateAggregates: true,
       })
     );
+
     pointSeries.bullets.push(function () {
       const container = am5.Container.new(root, {});
-
-      // Círculo
+      
       container.children.push(
         am5.Circle.new(root, {
           radius: 12,
@@ -88,7 +81,6 @@ export function GeoChurnHeatmap({ data = {} }) {
         })
       );
 
-      // Número
       container.children.push(
         am5.Label.new(root, {
           text: "{value}",
@@ -98,7 +90,6 @@ export function GeoChurnHeatmap({ data = {} }) {
           fill: am5.color(0xffffff),
           centerX: am5.p50,
           centerY: am5.p50,
-          
         })
       );
 
@@ -109,7 +100,7 @@ export function GeoChurnHeatmap({ data = {} }) {
       { title: "Alemania", latitude: 51.52, longitude: 10.40, value: gChurn },
       { title: "España", latitude: 40.41, longitude: -3.70, value: sChurn },
       { title: "Francia", latitude: 46.85, longitude: 2.35, value: fChurn },
-      { title: "Francia", latitude: 46.85, longitude: 2.35, value: fChurn }
+      { title: "Francia", latitude: 46.85, longitude: 2.35, value: fChurn },
     ].map((c) => ({
       title: c.title,
       value: c.value,
@@ -117,13 +108,20 @@ export function GeoChurnHeatmap({ data = {} }) {
     }));
 
     pointSeries.data.setAll(processedData);
+    chart.appear(1000, 50);
 
-    chart.appear(1000, 100);
+    // Guardamos root en una variable para la limpieza
+    chartRef.current.amRoot = root; 
 
-    return () => {
-      root.dispose();
-    };
-  }, [gChurn, sChurn, fChurn]);
+  }, 800); // El delay de renderizado
+
+  return () => {
+    clearTimeout(renderTimeout);
+    if (chartRef.current?.amRoot) {
+      chartRef.current.amRoot.dispose();
+    }
+  };
+}, [gChurn, sChurn, fChurn]);
 
   return (
     <div className="relative w-full h-full bg-white rounded-lg shadow-md p-4 overflow-hidden">
