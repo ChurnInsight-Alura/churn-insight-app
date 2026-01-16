@@ -1,24 +1,37 @@
 import { BarChart } from "../barChart/BarChart";
 
+function normalizeKeys(obj) {
+  if (!obj) return {};
+  return Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => [
+      key.charAt(0).toLowerCase() + key.slice(1),
+      value
+    ])
+  );
+}
+
 export default function PredictionDetail({ data,id }) {
   const labels = {
     1: "Si",
     0: "No",
   };
+
+  const normalizedData = normalizeKeys(data);
+
   const capitalize = (str) => {
     if (!str) return "No info";
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
   const CustomerId = id;
   const PredictedProba =
-    data?.predictedProba != null
-      ? Math.trunc(data.predictedProba * 1000) / 10 + "%"
+    normalizedData?.predictedProba != null
+      ? Math.trunc(normalizedData.predictedProba * 10) / 10 + "%"
       : "No info";
-  const PredictedLabel = labels[data?.predictedLabel] ?? "No info";
-  const CustomerSegment = data?.customerSegment
-    ? data.customerSegment.toUpperCase()
+  const PredictedLabel = labels[normalizedData?.predictedLabel] ?? "No info";
+  const CustomerSegment = normalizedData?.customerSegment
+    ? normalizedData.customerSegment.toUpperCase()
     : "No info";
-  const InterventionPriority = capitalize(data?.interventionPriority);
+  const InterventionPriority = capitalize(normalizedData?.interventionPriority);
 
   const probaF = parseFloat(PredictedProba);
 

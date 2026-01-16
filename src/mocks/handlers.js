@@ -70,11 +70,11 @@ export const mockDashboardData = {
 
 export const handlers = [
   // Intercepta peticiones para obtener datos del dashboard
-  http.get('*/dashboard', async () => {
+  http.get('/dashboard', async () => {
     await delay(500);
     return HttpResponse.json(mockDashboardData);
   }),
-  http.post("*/predict/integration/batch/pro/all", async () => {
+  http.post("/predict/integration/batch/pro/all", async () => {
     await delay(500);
     // Devolver datos reales del batch
     return HttpResponse.json({
@@ -109,7 +109,7 @@ export const handlers = [
       predictions: []
     });
   }),
-  http.post("*/integration/:id", async ({ params }) => {
+  http.post("/integration/:id", async ({ params }) => {
     await delay(800);
     // Aquí devuelves tu JSON estructurado
     return HttpResponse.json(customer);
