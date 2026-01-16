@@ -32,12 +32,12 @@ function transformData(data){
               
               // Datos para InterventionPriorityChart
               interventionPriority: [
+                { label: "Crítico", value: stats.QtyCritical || 0 },
                 { label: "Alta - Personalizada", value: stats["QtyHigh-Personalized"] || 0 },
                 { label: "Alta - Incentivo", value: stats["QtyHigh-Incentive"] || 0 },
-                { label: "Media - Monitoreo", value: stats["QtyMedium-Monitor"] || 0 },
                 { label: "Media - Correo", value: stats["QtyMedium-Mail"] || 0 },
+                { label: "Media - Monitoreo", value: stats["QtyMedium-Monitor"] || 0 },
                 { label: "Baja", value: stats.QtyLow || 0 },
-                { label: "Crítico", value: stats.QtyCritical || 0 }
               ],
               
               // Datos para DonutChurnChart
