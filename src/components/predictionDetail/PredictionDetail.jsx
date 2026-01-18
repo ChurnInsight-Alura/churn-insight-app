@@ -47,10 +47,10 @@ export default function PredictionDetail({ data,id }) {
     <div className="w-full flex flex-col font-medium gap-5">
 
       <div className="customer-id">
-        <h1 className="text-2xl flex gap-2"><span>Customer Id:</span><span>{CustomerId}</span></h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl flex gap-2 flex-wrap"><span>Customer Id:</span><span className="break-all">{CustomerId}</span></h1>
       </div>
 
-      <div className="stats-container grid sm:grid-cols-2 grid-cols-1 bg-white shadow rounded-lg  divide-x divide-gray-300 ">
+      <div className="stats-container grid grid-cols-1 md:grid-cols-2 bg-white shadow rounded-lg divide-y md:divide-y-0 md:divide-x divide-gray-300 ">
         <div className="customer-info flex flex-col  p-6">
           <div className="feature flex gap-1">
             <span className="">Churn Probability:</span>
