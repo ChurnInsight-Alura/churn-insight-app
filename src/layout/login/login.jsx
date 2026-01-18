@@ -38,12 +38,12 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-dvh w-full bg-[#eaf3fb]">
+    <div className="min-h-dvh w-full bg-[#eaf3fb] login-page">
       
       <div className="h-2 w-full bg-gradient-to-r from-[#001a37] via-[#315c99] to-[#40cee6]" />
 
       <div className="min-h-[calc(100dvh-0.5rem)] w-full flex items-center justify-center p-4">
-        <div className="w-full max-w-lg rounded-2xl border border-slate-100 bg-white shadow-[0_12px_30px_rgba(0,26,55,0.18)] overflow-hidden">
+        <div className="w-full max-w-lg rounded-2xl border border-slate-100 bg-white shadow-[0_12px_30px_rgba(0,26,55,0.18)] overflow-hidden login-card">
           
           <div className="px-6 pt-6">
             <div className="flex items-center gap-3 justify-between px-8">

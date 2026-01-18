@@ -11,6 +11,7 @@ import Profile from "./layout/profile/Profile";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { AuthProvider, RequireAuth, RequireAdmin } from "./auth/auth";
 import Login from "./layout/login/login";
+import AccessibilityToolbar from "./components/a11y/AccessibilityToolbar.jsx";
 
 
 
@@ -21,6 +22,8 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        {/* Controles globales de accesibilidad (A-/A+/Bold) */}
+        <AccessibilityToolbar />
         <Routes>
           {/* PUBLIC */}
           <Route path="/login" element={<Login />} />

@@ -1,11 +1,11 @@
 export default function Home() {
   return (
     <>
-     <div className="min-h-full flex justify-center items-center p-6">
+     <div className="min-h-full flex justify-center items-center p-6 home-page">
   <div className="flex flex-col justify-center items-center bg-azul7 p-10 md:p-16 rounded-3xl shadow-2xl border border-white/10 w-full max-w-6xl min-h-[50dvh] gap-12 ">
-    <div className="presentacion flex flex-col lg:flex-row justify-between items-center gap-12 w-full">
+    <div className="presentacion flex flex-col lg:flex-row justify-between items-center gap-6 w-full">
       
-      <div className="flex flex-col items-center lg:items-start max-w-lg">
+      <div className="flex flex-col items-center lg:items-start">
         <h1 className="text-4xl md:text-6xl tracking-tight font-black text-azul5 leading-tight text-center lg:text-left">
           Bienvenido a <span className="text-primary ">CusTech</span>
         </h1>
@@ -13,7 +13,7 @@ export default function Home() {
           Gestión inteligente de clientes
         </p>
       </div>
-      <div className="flex flex-col w-full lg:max-w-md bg-white/3 backdrop-blur-xl rounded-2xl border border-white/50 p-8 gap-6 shadow-inner">
+      <div className="flex flex-col w-full lg:max-w-2xl bg-white/3 backdrop-blur-xl rounded-2xl border border-white/50 p-6 gap-5 shadow-inner home-right-box">
         
         <div className="space-y-3">
           <h2 className="text-[10px] uppercase tracking-[0.4em] text-primary font-black opacity-80">Objetivo</h2>

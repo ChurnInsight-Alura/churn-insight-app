@@ -87,8 +87,8 @@ export function GaugeSpeedometer({ value = 0, threshold = 0, title = "Métrica" 
 
       {/* Valor y umbral */}
       <div className="text-center mt-2">
-        <p className="text-3xl font-bold text-gray-900">{value.toFixed(3)}</p>
-        <p className="text-sm text-gray-600 mt-1">Umbral: {threshold.toFixed(3)}</p>
+        <p className="text-3xl text-gray-900 speedometer-value">{value.toFixed(3)}</p>
+        <p className="text-sm text-gray-600 mt-1 speedometer-label">Umbral: <span className="speedometer-threshold">{threshold.toFixed(3)}</span></p>
         <p className={`text-xs font-semibold mt-2 ${value < threshold ? 'text-red-600' : 'text-green-600'}`}>
           {value < threshold ? '⚠️ Crítico' : '✓ Normal'}
         </p>

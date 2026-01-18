@@ -9,6 +9,173 @@
  
 }
 
-body {
-  background-color: var(--color-azul9);
+/* Accesibilidad: escala de fuente global basada en rem */
+:root {
+  --font-scale: 1;
 }
+
+html {
+  /* Tailwind usa rem para tamaños: esto escala toda la app */
+  font-size: calc(16px * var(--font-scale));
+}
+
+body {
+  background-color: #D7E7FF;
+}
+
+/* Modo de texto más grueso para baja visión */
+body.a11y-bold h1 { font-weight: 900 !important; }
+body.a11y-bold h2 { font-weight: 800 !important; }
+body.a11y-bold h3 { font-weight: 700 !important; }
+body.a11y-bold h4,
+body.a11y-bold h5,
+body.a11y-bold h6 { font-weight: 600 !important; }
+
+body.a11y-bold p:not(.speedometer-value):not(.speedometer-threshold):not(.speedometer-label),
+body.a11y-bold span:not(.speedometer-value):not(.speedometer-threshold):not(.speedometer-label),
+body.a11y-bold li,
+body.a11y-bold label,
+body.a11y-bold a,
+body.a11y-bold button { font-weight: 600 !important; }
+
+/* Excepciones: números del speedometer y metric cards siempre bold */
+.speedometer-value,
+.metric-value { font-weight: 900 !important; }
+.speedometer-label { font-weight: 600 !important; }
+.speedometer-threshold { font-weight: 900 !important; }
+
+/* En modo bold, mantener los números gruesos (no adelgazarlos) */
+body.a11y-bold .speedometer-value,
+body.a11y-bold .speedometer-threshold,
+body.a11y-bold .metric-value { font-weight: 900 !important; }
+
+/* Modo de alto contraste (WCAG): colores fuertes y legibles */
+body.a11y-contrast {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Sobrescribir variables de tema para alto contraste */
+body.a11y-contrast {
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-azul5: #000000;
+  --color-azul7: #ffffff;
+  --color-azul9: #000000;
+}
+
+/* Elementos comunes */
+body.a11y-contrast .bg-white { background-color: #000000 !important; }
+body.a11y-contrast .text-black,
+body.a11y-contrast .text-gray-600,
+body.a11y-contrast .text-slate-700,
+body.a11y-contrast .text-slate-800 { color: #ffffff !important; }
+
+/* Excepción: el título de dashboard debe verse oscuro sobre fondo claro en alto contraste */
+body.a11y-contrast .dashboard-title { color: #000000 !important; }
+
+/* Métricas: fondos negros y texto claro en alto contraste */
+body.a11y-contrast .metric-card {
+  background-color: #000000 !important;
+  background-image: none !important;
+  border-color: #ffffff !important;
+  box-shadow: none !important;
+}
+body.a11y-contrast .metric-card * { color: #ffffff !important; }
+
+/* Forzar alto contraste en textos comunes (encabezados, párrafos, etiquetas) */
+body.a11y-contrast :is(h1,h2,h3,h4,h5,h6,p,span,small,strong,em,li,dt,dd,label,a,button) {
+  color: #ffffff !important;
+}
+
+/* Altas etiquetas dentro de SVG (ej. labels en gráficos) */
+body.a11y-contrast svg text { fill: #ffffff !important; }
+
+body.a11y-contrast .border-slate-100,
+body.a11y-contrast .border-slate-200,
+body.a11y-contrast .border-slate-300 { border-color: #ffffff !important; }
+
+/* Inputs y botones */
+body.a11y-contrast input,
+body.a11y-contrast textarea,
+body.a11y-contrast select { background-color: #000000 !important; color: #ffffff !important; border-color: #ffffff !important; }
+
+/* Placeholders visibles en alto contraste */
+body.a11y-contrast input::placeholder,
+body.a11y-contrast textarea::placeholder { color: #e0e0e0 !important; }
+
+/* Estado de foco más visible */
+body.a11y-contrast :focus-visible { outline: 3px solid #ffff00 !important; outline-offset: 2px; }
+
+/* Mantener el header con su color original en alto contraste */
+body.a11y-contrast header.bg-primary {
+  background-color: #000E45 !important;
+  color: #ffffff !important;
+  border-bottom: 3px solid #ffffff !important;
+  box-shadow: none !important;
+}
+body.a11y-contrast header.bg-primary * { color: #ffffff !important; }
+
+/* UserMenu: asegurar contraste en hover dentro del menú en alto contraste */
+body.a11y-contrast .user-menu .um-item { color: #ffffff !important; background-color: #000000 !important; }
+body.a11y-contrast .user-menu .um-item:hover { background-color: #ffffff !important; color: #000000 !important; }
+body.a11y-contrast .user-menu { background-color: #000000 !important; border-color: #ffffff !important; }
+
+/* Login: fondo oscuro en alto contraste */
+body.a11y-contrast .login-page { background-color: #000000 !important; }
+body.a11y-contrast .login-page .h-2 { background: linear-gradient(to right, #1a1a66, #1a5a99, #00b8d4) !important; }
+body.a11y-contrast .login-card,
+body.a11y-contrast .login-page .bg-white { 
+  background-color: #1a1a1a !important; 
+  border-color: #ffffff !important; 
+}
+body.a11y-contrast .login-card h1,
+body.a11y-contrast .login-card label { color: #ffffff !important; }
+body.a11y-contrast .login-card input,
+body.a11y-contrast .login-card input::placeholder { 
+  background-color: #2a2a2a !important; 
+  border-color: #ffffff !important; 
+  color: #ffffff !important;
+}
+body.a11y-contrast .login-card button { 
+  background-color: #0066cc !important; 
+  color: #ffffff !important;
+}
+
+/* Home y Search Screen: fondos claros y texto negro en alto contraste */
+body.a11y-contrast .home-page { background-color: #ffffff !important; }
+body.a11y-contrast .home-page * { color: #000000 !important; background-color: transparent !important; }
+body.a11y-contrast .home-page div[class*="bg-"] { background-color: #f0f0f0 !important; border-color: #000000 !important; }
+body.a11y-contrast .home-page h1,
+body.a11y-contrast .home-page h2,
+body.a11y-contrast .home-page h3,
+body.a11y-contrast .home-page p,
+body.a11y-contrast .home-page span,
+body.a11y-contrast .home-page li { color: #000000 !important; }
+
+body.a11y-contrast .search-page { background-color: #ffffff !important; }
+body.a11y-contrast .search-page * { color: #000000 !important; background-color: transparent !important; }
+body.a11y-contrast .search-page .bg-azul7 { background-color: #f0f0f0 !important; }
+body.a11y-contrast .search-page svg { stroke: #000000 !important; fill: #000000 !important; }
+body.a11y-contrast .search-page svg path { stroke: #000000 !important; fill: #000000 !important; }
+body.a11y-contrast .search-page h1,
+body.a11y-contrast .search-page h2,
+body.a11y-contrast .search-page h3,
+body.a11y-contrast .search-page p,
+body.a11y-contrast .search-page span,
+body.a11y-contrast .search-page li { color: #000000 !important; }
+
+/* Aumentar tamaño de letra en el cuadro derecho de Home en alto contraste */
+body.a11y-contrast .home-right-box { font-size: 1.2rem; }
+body.a11y-contrast .home-right-box h2,
+body.a11y-contrast .home-right-box h3 { font-size: 1.3rem; }
+body.a11y-contrast .home-right-box p,
+body.a11y-contrast .home-right-box li { font-size: 1.1rem; }
+
+/* Sidebar: NO aplicar alto contraste cuando está en home o search */
+body.a11y-contrast aside {
+  background-color: rgba(0, 26, 55, 0.2) !important;
+  color: #001a37 !important;
+}
+body.a11y-contrast aside * { color: #001a37 !important; background-color: transparent !important; }
+body.a11y-contrast aside a:hover { color: #0b4081 !important; }
