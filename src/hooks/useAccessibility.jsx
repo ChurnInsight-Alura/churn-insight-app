@@ -1,64 +1,78 @@
 import { useCallback, useEffect, useState } from "react";
 
-const KEY_SCALE = "a11y:fontScale";
-const KEY_BOLD = "a11y:bold";
-const KEY_CONTRAST = "a11y:contrast";
-const KEY_FONT_FAMILY = "a11y:fontFamily";
+const KEYS = {
+  SCALE: "a11y:fontScale",
+  BOLD: "a11y:bold",
+  CONTRAST: "a11y:contrast",
+  FONT: "a11y:fontFamily",
+};
+
+const FONTS = {
+  default: "system-ui, -apple-system, sans-serif",
+  dyslexia: "'OpenDyslexic', system-ui, sans-serif",
+  roboto: "'Roboto', system-ui, sans-serif",
+  georgia: "Georgia, serif",
+};
 
 function read(key, def) {
   try {
     const v = localStorage.getItem(key);
     return v ? JSON.parse(v) : def;
-  } catch {
-    return def;
-  }
+  } catch { return def; }
 }
 
 export default function useAccessibility() {
-  const [fontScale, setFontScale] = useState(() => read(KEY_SCALE, 1));
-  const [bold, setBold] = useState(() => read(KEY_BOLD, false));
-  const [contrast, setContrast] = useState(() => read(KEY_CONTRAST, false));
-  const [fontFamily, setFontFamily] = useState(() => read(KEY_FONT_FAMILY, "default"));
+  const [fontScale, setFontScale] = useState(() => read(KEYS.SCALE, 1));
+  const [bold, setBold] = useState(() => read(KEYS.BOLD, false));
+  const [contrast, setContrast] = useState(() => read(KEYS.CONTRAST, false));
+  const [fontFamily, setFontFamily] = useState(() => read(KEYS.FONT, "default"));
 
+  // Sincronizar cambios entre pestañas
   useEffect(() => {
-    document.documentElement.style.setProperty("--font-scale", String(fontScale));
-    try { localStorage.setItem(KEY_SCALE, JSON.stringify(fontScale)); } catch {}
-  }, [fontScale]);
-
-  useEffect(() => {
-    document.body.classList.toggle("a11y-bold", !!bold);
-    try { localStorage.setItem(KEY_BOLD, JSON.stringify(bold)); } catch {}
-  }, [bold]);
-
-  useEffect(() => {
-    document.body.classList.toggle("a11y-contrast", !!contrast);
-    try { localStorage.setItem(KEY_CONTRAST, JSON.stringify(contrast)); } catch {}
-  }, [contrast]);
-
-  useEffect(() => {
-    document.documentElement.style.setProperty("--font-family", 
-      fontFamily === "default" ? "system-ui, -apple-system, sans-serif" :
-      fontFamily === "dyslexia" ? "'OpenDyslexic', system-ui, sans-serif" :
-      fontFamily === "roboto" ? "'Roboto', system-ui, sans-serif" :
-      fontFamily === "georgia" ? "'Georgia', serif" :
-      "system-ui, -apple-system, sans-serif"
-    );
-    try { localStorage.setItem(KEY_FONT_FAMILY, JSON.stringify(fontFamily)); } catch {}
-  }, [fontFamily]);
-
-  const increase = useCallback(() => {
-    setFontScale((s) => Math.min(1.6, Math.round((s + 0.1) * 10) / 10));
+    const handleStorage = (e) => {
+      if (e.key === KEYS.SCALE) setFontScale(JSON.parse(e.newValue));
+      if (e.key === KEYS.BOLD) setBold(JSON.parse(e.newValue));
+      if (e.key === KEYS.CONTRAST) setContrast(JSON.parse(e.newValue));
+      if (e.key === KEYS.FONT) setFontFamily(JSON.parse(e.newValue));
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
-  const decrease = useCallback(() => {
-    setFontScale((s) => Math.max(0.8, Math.round((s - 0.1) * 10) / 10));
+  // Efecto Maestro: Aplica cambios al DOM y guarda en Storage
+ useEffect(() => {
+    const root = document.documentElement;
+    const body = document.body; // <--- Referencia al body
+    
+   
+    root.style.setProperty("--font-scale", String(fontScale));
+    root.style.setProperty("--font-family", FONTS[fontFamily] || FONTS.default);
+    
+    // CLASES (Vuelven al body para que tu CSS funcione)
+    body.classList.toggle("a11y-bold", bold);
+    body.classList.toggle("a11y-contrast", contrast);
+
+    // Persistencia
+    localStorage.setItem(KEYS.SCALE, JSON.stringify(fontScale));
+    localStorage.setItem(KEYS.BOLD, JSON.stringify(bold));
+    localStorage.setItem(KEYS.CONTRAST, JSON.stringify(contrast));
+    localStorage.setItem(KEYS.FONT, JSON.stringify(fontFamily));
+  }, [fontScale, bold, contrast, fontFamily]);
+
+  const increase = useCallback(() => setFontScale(s => Math.min(1.6, +(s + 0.1).toFixed(1))), []);
+  const decrease = useCallback(() => setFontScale(s => Math.max(0.8, +(s - 0.1).toFixed(1))), []);
+  const reset = useCallback(() => {
+      setFontScale(1);
+      setBold(false);
+      setContrast(false);
+      setFontFamily("default");
   }, []);
 
-  const reset = useCallback(() => setFontScale(1), []);
-
-  const toggleBold = useCallback(() => setBold((b) => !b), []);
-  const toggleContrast = useCallback(() => setContrast((c) => !c), []);
-  const changeFontFamily = useCallback((newFamily) => setFontFamily(newFamily), []);
-
-  return { fontScale, bold, contrast, fontFamily, increase, decrease, reset, toggleBold, toggleContrast, changeFontFamily };
+  return { 
+    fontScale, bold, contrast, fontFamily, 
+    increase, decrease, reset, 
+    toggleBold: useCallback(() => setBold(b => !b), []),
+    toggleContrast: useCallback(() => setContrast(c => !c), []),
+    changeFontFamily: useCallback((val) => setFontFamily(val), [])
+  };
 }

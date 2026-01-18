@@ -2,8 +2,6 @@ import { ResponsiveBar } from "@nivo/bar";
 
 // 2. Función para determinar el color según el riesgo
   const getBarColor = (val) => {
-    console.log(val);
-    
     if (val >= 80) return '#ef4444'; // Rojo (Riesgo Crítico)
     if (val >= 50) return '#f97316'; // Naranja (Riesgo Medio)
     return '#22c55e';                // Verde (Riesgo Bajo)
