@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 const KEY_SCALE = "a11y:fontScale";
 const KEY_BOLD = "a11y:bold";
 const KEY_CONTRAST = "a11y:contrast";
+const KEY_FONT_FAMILY = "a11y:fontFamily";
 
 function read(key, def) {
   try {
@@ -17,6 +18,7 @@ export default function useAccessibility() {
   const [fontScale, setFontScale] = useState(() => read(KEY_SCALE, 1));
   const [bold, setBold] = useState(() => read(KEY_BOLD, false));
   const [contrast, setContrast] = useState(() => read(KEY_CONTRAST, false));
+  const [fontFamily, setFontFamily] = useState(() => read(KEY_FONT_FAMILY, "default"));
 
   useEffect(() => {
     document.documentElement.style.setProperty("--font-scale", String(fontScale));
@@ -33,6 +35,17 @@ export default function useAccessibility() {
     try { localStorage.setItem(KEY_CONTRAST, JSON.stringify(contrast)); } catch {}
   }, [contrast]);
 
+  useEffect(() => {
+    document.documentElement.style.setProperty("--font-family", 
+      fontFamily === "default" ? "system-ui, -apple-system, sans-serif" :
+      fontFamily === "dyslexia" ? "'OpenDyslexic', system-ui, sans-serif" :
+      fontFamily === "roboto" ? "'Roboto', system-ui, sans-serif" :
+      fontFamily === "georgia" ? "'Georgia', serif" :
+      "system-ui, -apple-system, sans-serif"
+    );
+    try { localStorage.setItem(KEY_FONT_FAMILY, JSON.stringify(fontFamily)); } catch {}
+  }, [fontFamily]);
+
   const increase = useCallback(() => {
     setFontScale((s) => Math.min(1.6, Math.round((s + 0.1) * 10) / 10));
   }, []);
@@ -45,6 +58,7 @@ export default function useAccessibility() {
 
   const toggleBold = useCallback(() => setBold((b) => !b), []);
   const toggleContrast = useCallback(() => setContrast((c) => !c), []);
+  const changeFontFamily = useCallback((newFamily) => setFontFamily(newFamily), []);
 
-  return { fontScale, bold, contrast, increase, decrease, reset, toggleBold, toggleContrast };
+  return { fontScale, bold, contrast, fontFamily, increase, decrease, reset, toggleBold, toggleContrast, changeFontFamily };
 }

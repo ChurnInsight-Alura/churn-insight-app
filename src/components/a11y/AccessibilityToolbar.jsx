@@ -6,7 +6,7 @@ import useAccessibility from "../../hooks/useAccessibility.jsx";
 export default function AccessibilityToolbar() {
   const location = useLocation();
   const isDashboard = location.pathname === "/dashboard";
-  const { fontScale, bold, contrast, increase, decrease, reset, toggleBold, toggleContrast } = useAccessibility();
+  const { fontScale, bold, contrast, fontFamily, increase, decrease, reset, toggleBold, toggleContrast, changeFontFamily } = useAccessibility();
 
   // Desactivar contraste cuando se sale del dashboard
   useEffect(() => {
@@ -44,6 +44,19 @@ export default function AccessibilityToolbar() {
       >
         <span style={{ fontWeight: 800 }}>A</span>
       </button>
+
+      <select
+        className="a11y-select"
+        aria-label="Cambiar tipografía"
+        value={fontFamily}
+        onChange={(e) => changeFontFamily(e.target.value)}
+        title="Seleccionar tipografía"
+      >
+        <option value="default" title="Tipografía por defecto">Tf</option>
+        <option value="dyslexia" title="OpenDyslexic (dislexia)">Dy</option>
+        <option value="roboto" title="Roboto (sans-serif)">Rb</option>
+        <option value="georgia" title="Georgia (serif)">Gg</option>
+      </select>
 
       {isDashboard && (
         <button

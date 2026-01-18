@@ -12,15 +12,18 @@
 /* Accesibilidad: escala de fuente global basada en rem */
 :root {
   --font-scale: 1;
+  --font-family: system-ui, -apple-system, sans-serif;
 }
 
 html {
   /* Tailwind usa rem para tamaños: esto escala toda la app */
   font-size: calc(16px * var(--font-scale));
+  font-family: var(--font-family);
 }
 
 body {
   background-color: #D7E7FF;
+  font-family: var(--font-family);
 }
 
 /* Modo de texto más grueso para baja visión */

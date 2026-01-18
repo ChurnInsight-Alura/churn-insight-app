@@ -1,3 +1,7 @@
+
+/* Importar Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&family=Roboto:wght@400;600;700;900&family=Georgia&display=swap');
+
 .a11y-toolbar {
   position: fixed;
   right: 8px;
@@ -27,8 +31,27 @@
   cursor: pointer;
 }
 
+.a11y-select {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #0b1a38;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px;
+  text-align: center;
+}
+
 .a11y-btn:focus-visible {
   outline: 3px solid #40cee6; /* color del tema */
+  outline-offset: 2px;
+}
+
+.a11y-select:focus-visible {
+  outline: 3px solid #40cee6;
   outline-offset: 2px;
 }
 
@@ -47,13 +70,16 @@
 @media (max-width: 640px) {
   .a11y-toolbar { right: 6px; gap: 8px; }
   .a11y-btn { width: 40px; height: 40px; font-size: 16px; }
+  .a11y-select { width: 40px; height: 40px; font-size: 12px; }
 }
 
 /* Mantener colores del toolbar aunque el modo contraste alto esté activo */
 body.a11y-contrast .a11y-toolbar { background: #142b61 !important; }
 body.a11y-contrast .a11y-toolbar .a11y-btn { background: #ffffff !important; color: #0b1a38 !important; }
+body.a11y-contrast .a11y-toolbar .a11y-select { background: #ffffff !important; color: #0b1a38 !important; }
 body.a11y-contrast .a11y-toolbar .a11y-indicator { color: #eaf3fb !important; }
 body.a11y-contrast .a11y-toolbar .a11y-btn:focus-visible { outline-color: #40cee6 !important; }
+body.a11y-contrast .a11y-toolbar .a11y-select:focus-visible { outline-color: #40cee6 !important; }
 /* Asegurar íconos visibles en alto contraste */
 body.a11y-contrast .a11y-toolbar .a11y-btn svg,
 body.a11y-contrast .a11y-toolbar .a11y-btn span { color: #0b1a38 !important; fill: #0b1a38 !important; }
