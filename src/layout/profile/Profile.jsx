@@ -27,7 +27,7 @@ export default function Profile() {
         
      
         <div className="group bg-white/3 backdrop-blur-xl p-6 rounded-2xl border border-white/10 hover:border-primary/40 transition-all duration-300">
-          <p className="text-[10px] uppercase tracking-widest text-primary/80 font-bold mb-1">Nombre de Usuario</p>
+          <p className="text-sm uppercase tracking-widest text-primary/80 font-bold mb-1">Nombre de Usuario</p>
           <h2 className="text-xl text-slate-400 font-semibold group-hover:text-azul5 transition-colors">
             {name}
           </h2>
@@ -35,7 +35,7 @@ export default function Profile() {
 
       
         <div className="group bg-white/3 backdrop-blur-xl p-6 rounded-2xl border border-white/10 hover:border-primary/40 transition-all duration-300">
-          <p className="text-[10px] uppercase tracking-widest text-primary/80 font-bold mb-1">Rol Asignado</p>
+          <p className="text-sm uppercase tracking-widest text-primary/80 font-bold mb-1">Rol Asignado</p>
           <div className="flex items-center gap-2">
              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
              <h2 className="text-xl text-slate-400 font-semibold capitalize group-hover:text-azul5 transition-colors">

@@ -56,7 +56,7 @@ export default function Dashboard() {
           <GaugeSpeedometer
             value={data?.transactions?.AvgTxRateChange || 0}
             threshold={data?.transactions?.threshold || -0.22}
-            title="Promedio Tasa de Cambio Q2 → Q3 <br/> Volumen Transacciones"
+            title={<>Promedio Tasa de Cambio Q2 → Q3 <br/> Volumen Transacciones</>}
           />
         </div>
 
@@ -66,7 +66,7 @@ export default function Dashboard() {
           <GaugeSpeedometer
             value={data?.sessions?.AvgSsRateChange || 0}
             threshold={data?.sessions?.threshold || -0.28}
-            title="Promedio Tasa de Cambio Q2 → Q3 <br />Volumen Sesiones"
+            title={<>Promedio Tasa de Cambio Q2 → Q3 <br />Volumen Sesiones</>}
           />
         </div>
       </div>
