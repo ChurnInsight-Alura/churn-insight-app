@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./a11y.css";
 import useAccessibility from "../../hooks/useAccessibility.jsx";
@@ -7,6 +7,13 @@ export default function AccessibilityToolbar() {
   const location = useLocation();
   const isDashboard = location.pathname === "/dashboard";
   const { fontScale, bold, contrast, increase, decrease, reset, toggleBold, toggleContrast } = useAccessibility();
+
+  // Desactivar contraste cuando se sale del dashboard
+  useEffect(() => {
+    if (!isDashboard && contrast) {
+      toggleContrast();
+    }
+  }, [isDashboard, contrast, toggleContrast]);
 
   return (
     <div className="a11y-toolbar" role="group" aria-label="Controles de accesibilidad">

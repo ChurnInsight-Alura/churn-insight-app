@@ -121,27 +121,6 @@ body.a11y-contrast .user-menu .um-item { color: #ffffff !important; background-c
 body.a11y-contrast .user-menu .um-item:hover { background-color: #ffffff !important; color: #000000 !important; }
 body.a11y-contrast .user-menu { background-color: #000000 !important; border-color: #ffffff !important; }
 
-/* Login: fondo oscuro en alto contraste */
-body.a11y-contrast .login-page { background-color: #000000 !important; }
-body.a11y-contrast .login-page .h-2 { background: linear-gradient(to right, #1a1a66, #1a5a99, #00b8d4) !important; }
-body.a11y-contrast .login-card,
-body.a11y-contrast .login-page .bg-white { 
-  background-color: #1a1a1a !important; 
-  border-color: #ffffff !important; 
-}
-body.a11y-contrast .login-card h1,
-body.a11y-contrast .login-card label { color: #ffffff !important; }
-body.a11y-contrast .login-card input,
-body.a11y-contrast .login-card input::placeholder { 
-  background-color: #2a2a2a !important; 
-  border-color: #ffffff !important; 
-  color: #ffffff !important;
-}
-body.a11y-contrast .login-card button { 
-  background-color: #0066cc !important; 
-  color: #ffffff !important;
-}
-
 /* Home y Search Screen: fondos claros y texto negro en alto contraste */
 body.a11y-contrast .home-page { background-color: #ffffff !important; }
 body.a11y-contrast .home-page * { color: #000000 !important; background-color: transparent !important; }
@@ -152,6 +131,16 @@ body.a11y-contrast .home-page h3,
 body.a11y-contrast .home-page p,
 body.a11y-contrast .home-page span,
 body.a11y-contrast .home-page li { color: #000000 !important; }
+
+/* LOGIN: Sin cambios en alto contraste - mantener estilos normales */
+body.a11y-contrast .login-page,
+body.a11y-contrast .login-card { background-color: unset !important; color: unset !important; }
+body.a11y-contrast .login-page * { color: unset !important; background-color: unset !important; }
+body.a11y-contrast .login-page input,
+body.a11y-contrast .login-page textarea,
+body.a11y-contrast .login-page select { background-color: unset !important; color: unset !important; border-color: unset !important; }
+body.a11y-contrast .login-page input::placeholder,
+body.a11y-contrast .login-page textarea::placeholder { color: unset !important; }
 
 body.a11y-contrast .search-page { background-color: #ffffff !important; }
 body.a11y-contrast .search-page * { color: #000000 !important; background-color: transparent !important; }
