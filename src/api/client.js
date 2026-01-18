@@ -15,11 +15,22 @@ const apiClient = axios.create({
 export const fetchCustomerById = async (id) => {
   try {
     
-    const { data } = await apiClient.post(`/integration/${id}`,{});
+    const { data } = await apiClient.post(`/predict/integration/${id}`,{});
     return data;
   } catch (error) {
+     console.error(`Error fetching customer ${id}:`, error.response?.data || error.message);
     throw error;
   }
 };
+
+export const fetchDashboardData = async () => {
+  try {
+    const { data } = await apiClient.post('/predict/integration/batch/pro/all', {})
+    return data
+  } catch (error) {
+    console.error(`Error fetching Dashboard:`, error.response?.data || error.message);
+    throw error
+  }
+}
 
 export default apiClient;

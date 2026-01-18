@@ -6,136 +6,133 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 export function GeoChurnHeatmap({ data = {} }) {
   const chartRef = useRef(null);
-  const rootRef = useRef(null);
-  const { ChurnersGermany = 0, ChurnersSpain = 0, ChurnersFrance = 0 } = data;
 
+  const gChurn = data?.ChurnersGermany ?? data?.churnersGermany ?? 0;
+  const sChurn = data?.ChurnersSpain ?? data?.churnersSpain ?? 0;
+  const fChurn = data?.ChurnersFrance ?? data?.churnersFrance ?? 0;
+  
   useEffect(() => {
-    // Limpiar instancia anterior si existe
-    if (rootRef.current) {
-      rootRef.current.dispose();
-    }
+  if (!chartRef.current) return;
 
-    // Verificar que el elemento existe
-    if (!chartRef.current) return;
-
-    // Crear root
+  // Usamos un pequeño delay (50ms) para garantizar que el contenedor esté listo
+  const renderTimeout = setTimeout(() => {
+    // --- ROOT ---
     const root = am5.Root.new(chartRef.current);
-    rootRef.current = root;
-    
     root.setThemes([am5themes_Animated.new(root)]);
 
-    // Crear mapa
+    // --- MAP CHART ---
     const chart = root.container.children.push(
       am5map.MapChart.new(root, {
         panX: "rotateX",
         panY: "translateY",
         projection: am5map.geoMercator(),
+        homeGeoPoint: { latitude: 48, longitude: 6 },
+        homeZoomLevel: 4.5,
+        wheelY: "zoom",      // ZOOM CON RUEDA DEL RATÓN
+        wheelSensitivity: 0.7, // Ajuste de sensibilidad para que se sienta fluido
+        pinchZoom: true      // ZOOM TÁCTIL
       })
     );
 
-    const zoomControl = chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
-    zoomControl.homeButton.set("visible", true);
+    // --- FORZAR ZOOM INICIAL (200ms adicionales después de crear el chart) ---
+    setTimeout(() => {
+      if (!root.isDisposed()) {
+        chart.zoomToGeoPoint({ latitude: 47, longitude: 5 }, 5, true);
+      }
+    }, 200);
 
-    // Series de polígonos (países)
+    // --- POLYGON SERIES ---
     const polygonSeries = chart.series.push(
       am5map.MapPolygonSeries.new(root, {
         geoJSON: am5geodata_worldLow,
-        exclude: ["AQ"],
+        exclude: ["AQ"]
       })
     );
 
     polygonSeries.mapPolygons.template.setAll({
-      fill: am5.color(0xdadada),
+      fill: am5.color(0xecf0f1),
+      stroke: am5.color(0xbdc3c7),
+      interactive: true,
+      cursorOverStyle: "pointer"
     });
 
-    // Series de puntos (clustered)
-    const pointSeries = chart.series.push(am5map.ClusteredPointSeries.new(root, {}));
+    polygonSeries.mapPolygons.template.states.create("hover", {
+      fill: am5.color(0xd0d0d0)
+    });
 
-    // Bullet clustered
-    pointSeries.set("clusteredBullet", function (root) {
-      const container = am5.Container.new(root, { cursorOverStyle: "pointer" });
+    // --- PUNTOS CON NUMERO ---
+    const pointSeries = chart.series.push(
+      am5map.MapPointSeries.new(root, {
+        calculateAggregates: true,
+      })
+    );
 
+    pointSeries.bullets.push(function () {
+      const container = am5.Container.new(root, {});
+      
       container.children.push(
-        am5.Circle.new(root, { radius: 8, tooltipY: 0, fill: am5.color(0xff8c00) })
-      );
-      container.children.push(
-        am5.Circle.new(root, { radius: 12, fillOpacity: 0.3, tooltipY: 0, fill: am5.color(0xff8c00) })
-      );
-      container.children.push(
-        am5.Circle.new(root, { radius: 16, fillOpacity: 0.3, tooltipY: 0, fill: am5.color(0xff8c00) })
+        am5.Circle.new(root, {
+          radius: 12,
+          fill: am5.color(0xff8c00),
+          stroke: am5.color(0xffffff),
+          interactive: true,
+          strokeWidth: 2,
+          tooltipText: "{title}: {value}"
+        })
       );
 
       container.children.push(
         am5.Label.new(root, {
+          text: "{value}",
+          populateText: true,
+          fontSize: 12,
+          fontWeight: "bold",
+          fill: am5.color(0xffffff),
           centerX: am5.p50,
           centerY: am5.p50,
-          fill: am5.color(0xffffff),
-          populateText: true,
-          fontSize: "8",
-          text: "{value}",
         })
       );
-
-      container.events.on("click", function (e) {
-        pointSeries.zoomToCluster(e.target.dataItem);
-      });
 
       return am5.Bullet.new(root, { sprite: container });
     });
 
-    // Bullets regulares
-    pointSeries.bullets.push(function () {
-      const circle = am5.Circle.new(root, {
-        radius: 6,
-        tooltipY: 0,
-        fill: am5.color(0xff8c00),
-        tooltipText: "{title}: {value} churners",
-      });
-      return am5.Bullet.new(root, { sprite: circle });
-    });
+    const processedData = [
+      { title: "Alemania", latitude: 51.52, longitude: 10.40, value: gChurn },
+      { title: "España", latitude: 40.41, longitude: -3.70, value: sChurn },
+      { title: "Francia", latitude: 46.85, longitude: 2.35, value: fChurn },
+      { title: "Francia", latitude: 46.85, longitude: 2.35, value: fChurn },
+    ].map((c) => ({
+      title: c.title,
+      value: c.value,
+      geometry: { type: "Point", coordinates: [c.longitude, c.latitude] }
+    }));
 
-    // Datos de ciudades europeas con valores de churn
-    const cities = [
-      { title: "Berlin", latitude: 52.5235, longitude: 13.4115, value: ChurnersGermany },
-      { title: "Madrid", latitude: 40.4167, longitude: -3.7033, value: ChurnersSpain },
-      { title: "Paris", latitude: 48.8567, longitude: 2.351, value: ChurnersFrance },
-      { title: "Vienna", latitude: 48.2092, longitude: 16.3728, value: Math.floor(Math.random() * 200) },
-      { title: "Rome", latitude: 41.8955, longitude: 12.4823, value: Math.floor(Math.random() * 200) },
-      { title: "Brussels", latitude: 50.8371, longitude: 4.3676, value: Math.floor(Math.random() * 200) },
-      { title: "Amsterdam", latitude: 52.3738, longitude: 4.891, value: Math.floor(Math.random() * 200) },
-      { title: "Lisbon", latitude: 38.7072, longitude: -9.1355, value: Math.floor(Math.random() * 200) },
-      { title: "Prague", latitude: 50.0878, longitude: 14.4205, value: Math.floor(Math.random() * 200) },
-      { title: "Copenhagen", latitude: 55.6763, longitude: 12.5681, value: Math.floor(Math.random() * 200) },
-      { title: "Stockholm", latitude: 59.3328, longitude: 18.0645, value: Math.floor(Math.random() * 200) },
-      { title: "Oslo", latitude: 59.9138, longitude: 10.7387, value: Math.floor(Math.random() * 200) },
-      { title: "Warsaw", latitude: 52.2297, longitude: 21.0122, value: Math.floor(Math.random() * 200) },
-      { title: "Budapest", latitude: 47.4984, longitude: 19.0408, value: Math.floor(Math.random() * 200) },
-      { title: "Athens", latitude: 37.9792, longitude: 23.7166, value: Math.floor(Math.random() * 200) },
-    ];
+    pointSeries.data.setAll(processedData);
+    chart.appear(1000, 50);
 
-    cities.forEach((city) => {
-      pointSeries.data.push({
-        geometry: { type: "Point", coordinates: [city.longitude, city.latitude] },
-        title: city.title,
-        value: city.value,
-      });
-    });
+    // Guardamos root en una variable para la limpieza
+    chartRef.current.amRoot = root; 
 
-    chart.appear(1000, 100);
+  }, 800); // El delay de renderizado
 
-    // Cleanup: disponer del root cuando el componente se desmonte
-    return () => {
-      if (rootRef.current) {
-        rootRef.current.dispose();
-        rootRef.current = null;
-      }
-    };
-  }, [ChurnersGermany, ChurnersSpain, ChurnersFrance]);
+  return () => {
+    clearTimeout(renderTimeout);
+    if (chartRef.current?.amRoot) {
+      chartRef.current.amRoot.dispose();
+    }
+  };
+}, [gChurn, sChurn, fChurn]);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 h-full">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Mapa de Calor de Churn</h3>
-      <div ref={chartRef} className="w-full h-96"></div>
+    <div className="relative w-full h-full bg-white rounded-lg shadow-md p-4 overflow-hidden">
+      <h3 className="text-lg font-semibold mb-2 relative z-10">
+        Distribución de Fuga
+      </h3>
+      <div
+        ref={chartRef}
+        className="w-full h-125 pointer-events-auto"
+        style={{ touchAction: "none" }}
+      ></div>
     </div>
   );
 }

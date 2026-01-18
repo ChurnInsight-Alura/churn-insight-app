@@ -3,15 +3,15 @@ export default function EngagementStrat({ strat, week }) {
   const lineas = text.split("\n");
   
   return (
-    <div className="strat-container flex flex-col bg-white  p-4 rounded-2xl gap-2 min-h-60 max-h-60 ">
-      <h1 className="week-title text-2xl text-black">Semana {week}</h1>
+    <div className="strat-container flex flex-col bg-white  p-3 md:p-4 rounded-2xl gap-2 min-h-auto md:min-h-60 md:max-h-60">
+      <h1 className="week-title text-lg md:text-2xl text-black font-bold">Semana {week}</h1>
 
-      <div className="space-y-2 overflow-y-auto pr-2">
+      <div className="space-y-1 md:space-y-2 overflow-y-auto pr-2">
         {lineas.map((linea, index) => {
           if (!linea.trim()) return <br key={index} />; // Respetamos líneas vacías
 
           return (
-            <p key={index} className="text-sm text-gray-600 leading-snug">
+            <p key={index} className="text-xs md:text-sm text-gray-600 leading-snug">
               {linea}
             </p>
           );

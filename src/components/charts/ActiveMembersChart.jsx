@@ -25,7 +25,7 @@ export function ActiveMembersChart({ data = {} }) {
                   backgroundColor: '#007789'
                 }}
               ></div>
-              <span className="text-xs text-gray-600 mt-2">No salieron</span>
+              <span className="text-xs text-gray-600 mt-2">No saldran</span>
               <span className="text-xl font-bold text-gray-900 mt-1">{activeExit0}</span>
             </div>
             
@@ -38,7 +38,7 @@ export function ActiveMembersChart({ data = {} }) {
                   backgroundColor: '#ff7b00'
                 }}
               ></div>
-              <span className="text-xs text-gray-600 mt-2">Salieron</span>
+              <span className="text-xs text-gray-600 mt-2">Saldran</span>
               <span className="text-xl font-bold text-gray-900 mt-1">{activeExit1}</span>
             </div>
           </div>
@@ -57,7 +57,7 @@ export function ActiveMembersChart({ data = {} }) {
                   backgroundColor: '#007789'
                 }}
               ></div>
-              <span className="text-xs text-gray-600 mt-2">No salieron</span>
+              <span className="text-xs text-gray-600 mt-2">No saldran</span>
               <span className="text-xl font-bold text-gray-900 mt-1">{inactiveExit0}</span>
             </div>
             
@@ -70,7 +70,7 @@ export function ActiveMembersChart({ data = {} }) {
                   backgroundColor: '#ff7b00'
                 }}
               ></div>
-              <span className="text-xs text-gray-600 mt-2">Salieron</span>
+              <span className="text-xs text-gray-600 mt-2">Saldran</span>
               <span className="text-xl font-bold text-gray-900 mt-1">{inactiveExit1}</span>
             </div>
           </div>

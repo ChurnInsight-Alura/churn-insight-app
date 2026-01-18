@@ -112,7 +112,7 @@ export const handlers = [
   http.post("*/integration/:id", async ({ params }) => {
     await delay(800);
     // Aquí devuelves tu JSON estructurado
-    return HttpResponse.json(customer);
+    return HttpResponse.json(customer());
   })
   
   ,

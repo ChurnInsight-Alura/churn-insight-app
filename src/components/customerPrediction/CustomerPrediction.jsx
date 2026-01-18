@@ -12,8 +12,9 @@ import useCustomerPredict from "../../hooks/useCustomerPredict";
 // }
 
 export default function CustomerPrediction({debouncedTerm}) {
-  const {isLoading,isFetched,data} = useCustomerPredict(debouncedTerm)
-
+  const {isLoading,isFetched,data,error} = useCustomerPredict(debouncedTerm)
+  console.log(data);
+  
   return (
     <div className="w-full h-full flex items-center">
       {(debouncedTerm || "").length === 0 && (
@@ -37,13 +38,13 @@ export default function CustomerPrediction({debouncedTerm}) {
         </div>
       )}
 
-      {isLoading && (
+      {isLoading && !error && (
         <div className="flex items-center justify-center w-full">
           <p className="animate-pulse text-2xl font-bold">Cargando...</p>
         </div>
       )}
 
-      {isFetched && !data && (
+      {isFetched && !data && !isLoading && (
         <div className="flex items-center justify-center w-full">
           <h1 className="text-red-500 text-2xl font-bold">
             No pudimos encontrar ese cliente

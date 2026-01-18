@@ -7,7 +7,7 @@ export function MetricCard({ title, value, decimals = 0 }) {
         {title.replace(/\\n/g, "\n")}
       </h3>
       <div className="text-center">
-        <p className="text-3xl font-bold text-[#007789]">
+        <p className="text-3xl text-[#007789] metric-value">
           {typeof value === "number" ? value.toFixed(decimals) : value}
         </p>
       </div>

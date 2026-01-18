@@ -19,18 +19,18 @@ export default function EngagementStrats({debouncedTerm}) {
 
   return (
     <div className="engagement-container flex flex-col gap-6">
-      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-800">
+      <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-slate-800">
         Estrategia sugerida <span className="text-base font-medium text-slate-400">(LLM Reglas)</span>
       </h1>
 
-      <div className="rules bg-azul5 flex flex-col p-4 rounded-4xl gap-8 text-white shadow-xl shadow-blue-900/10">
+      <div className="rules bg-azul5 flex flex-col p-4 md:p-6 lg:p-8 rounded-4xl gap-8 text-white shadow-xl shadow-blue-900/10">
         
         <section className="space-y-2">
-          <h2 className="text-blue-100 text-sm uppercase tracking-wider font-bold">Análisis del Cliente</h2>
-          <p className="text-base leading-relaxed font-normal opacity-90">{analisis_breve}</p>
+          <h2 className="text-blue-100 text-sm md:text-base uppercase tracking-wider font-bold">Análisis del Cliente</h2>
+          <p className="text-base md:text-lg leading-relaxed font-normal opacity-90">{analisis_breve}</p>
         </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-medium">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 font-medium">
           {strategies.map((strat, i) => (
             <EngagementStrat 
               key={`strat-${i}`} 
