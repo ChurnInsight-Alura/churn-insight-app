@@ -13,10 +13,10 @@ export default function Home() {
           Gestión inteligente de clientes
         </p>
       </div>
-      <div className="flex flex-col w-full lg:max-w-2xl bg-white/3 backdrop-blur-xl rounded-2xl border border-white/50 p-6 gap-5 shadow-inner home-right-box">
+      <div className="flex flex-col w-full lg:max-w-2xl bg-white/40 backdrop-blur-xl rounded-2xl border border-white/50 p-6 gap-5 shadow-inner home-right-box">
         
         <div className="space-y-3">
-          <h2 className="text-[10px] uppercase tracking-[0.4em] text-primary font-black opacity-80">Objetivo</h2>
+          <h2 className="text-sm uppercase tracking-[0.4em] text-primary font-black opacity-80">Objetivo</h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed">
             Reducir la pérdida de cartera vigente y aumentar el <span className="text-primary font-bold bg-primary/10 px-2 py-0.5 rounded-md">Lifetime Value</span>
           </p>
@@ -25,7 +25,7 @@ export default function Home() {
         {/* <div className="h-px bg-linear-tor from-transparent via-white/10 to-transparent"></div> */}
 
          <div className="space-y-4">
-          <h3 className="text-[10px] uppercase tracking-[0.4em] text-primary font-black opacity-80">Cómo lo hace</h3>
+          <h3 className="text-sm uppercase tracking-[0.4em] text-primary font-black opacity-80">Cómo lo hace</h3>
           <ul className="space-y-3">
             {[
               "Predicción de churn por cliente",
@@ -33,7 +33,7 @@ export default function Home() {
               "Estrategias sugeridas por IA / reglas",
               "Monitoreo gerencial en tiempo real"
             ].map((item, i) => (
-              <li key={i} className="flex items-center gap-3 text-slate-400 text-sm group">
+              <li key={i} className="flex items-center gap-3 text-slate-500 text-sm group ">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary group-hover:scale-150 transition-transform shadow-[0_0_8px_#var(--primary)]" />
                 {item}
               </li>
@@ -42,12 +42,12 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <h3 className="text-[9px] uppercase tracking-[0.2em] text-azul5 font-bold">Impacto</h3>
-            <p className="text-slate-400 text-[11px] leading-tight">Insight accionable antes del abandono.</p>
+            <h3 className="text-xs uppercase tracking-[0.2em] text-azul5 font-bold">Impacto</h3>
+            <p className="text-slate-600 text-xs leading-tight font-semibold">Insight accionable antes del abandono.</p>
           </div>
           <div className="space-y-2">
-            <h3 className="text-[9px] uppercase tracking-[0.2em] text-azul5 font-bold">Agradecimientos</h3>
-            <p className="text-slate-500 text-[11px] leading-tight italic">Oracle, Alura, NoCountry & ONE.</p>
+            <h3 className="text-xs uppercase tracking-[0.2em] text-azul5 font-bold">Agradecimientos</h3>
+            <p className="text-slate-600 text-xs leading-tight italic">Oracle, Alura, NoCountry & ONE.</p>
           </div>
         </div>
       </div>

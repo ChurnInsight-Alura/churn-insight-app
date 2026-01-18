@@ -12,7 +12,6 @@ export default function useBatch() {
   });
 }
 function transformData(data){
-    console.log(data);
     
     const {
               bucketDate,

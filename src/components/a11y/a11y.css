@@ -2,76 +2,112 @@
 /* Importar Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&family=Roboto:wght@400;600;700;900&family=Georgia&display=swap');
 
+/* 1. Base del contenedor (Píldora flotante) */
 .a11y-toolbar {
   position: fixed;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 20px;
+  bottom: 20px; /* Siempre abajo a la derecha */
+  z-index: 9999;
+  background: #142b61;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  
+  /* Estado inicial: Círculo pequeño */
+  width: 52px;
+  max-height: 52px;
+  border-radius: 26px;
+}
+
+/* 2. Estado Abierto (Aplica a cualquier resolución) */
+.a11y-toolbar.is-open {
+  max-height: 500px; /* Altura suficiente para desplegarse */
+  border-radius: 16px;
+}
+
+/* 3. El Botón del Engranaje (Visible siempre) */
+.a11y-toggle-mobile {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.a11y-toolbar.is-open .a11y-toggle-mobile {
+  transform: rotate(90deg); /* Efecto visual de apertura */
+}
+
+/* 4. Contenedor de botones (Animación de entrada) */
+.a11y-content {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 8px;
-  border-radius: 16px;
-  background: #142b61; /* azul oscuro con buen contraste */
-  box-shadow: 0 8px 20px rgba(0, 26, 55, 0.25);
-  z-index: 50;
+  margin-top: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.a11y-btn {
-  width: 44px;
-  height: 44px;
+.a11y-toolbar.is-open .a11y-content {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 5. Estilos de los botones internos */
+.a11y-btn, .a11y-select {
+  width: 42px;
+  height: 42px;
   display: grid;
   place-items: center;
   border: none;
   border-radius: 12px;
   background: #ffffff;
   color: #0b1a38;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .a11y-select {
-  width: 44px;
-  height: 44px;
-  border: none;
-  border-radius: 12px;
-  background: #ffffff;
-  color: #0b1a38;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 4px;
-  text-align: center;
-}
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px;
 
-.a11y-btn:focus-visible {
-  outline: 3px solid #40cee6; /* color del tema */
-  outline-offset: 2px;
-}
-
-.a11y-select:focus-visible {
-  outline: 3px solid #40cee6;
-  outline-offset: 2px;
 }
 
 .a11y-active {
-  background: #e6f7fb;
-  color: #0b1a38;
+  background: #40cee6 !important;
+  color: #ffffff !important;
 }
 
 .a11y-indicator {
   display: block;
   text-align: center;
   color: #eaf3fb;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: bold;
+  padding-bottom: 5px;
 }
 
-@media (max-width: 640px) {
-  .a11y-toolbar { right: 6px; gap: 8px; }
-  .a11y-btn { width: 40px; height: 40px; font-size: 16px; }
-  .a11y-select { width: 40px; height: 40px; font-size: 12px; }
+/* 6. Soporte para el Modo Contraste (Cuerpo con clase .a11y-contrast) */
+body.a11y-contrast .a11y-toolbar {
+  border: 2px solid #ffffff;
 }
+
 
 /* Mantener colores del toolbar aunque el modo contraste alto esté activo */
 body.a11y-contrast .a11y-toolbar { background: #142b61 !important; }

@@ -13,7 +13,6 @@ import useCustomerPredict from "../../hooks/useCustomerPredict";
 
 export default function CustomerPrediction({debouncedTerm}) {
   const {isLoading,isFetched,data,error} = useCustomerPredict(debouncedTerm)
-  console.log(data);
   
   return (
     <div className="w-full h-full flex items-center">
