@@ -18,7 +18,22 @@ export const fetchCustomerById = async (id) => {
     const { data } = await apiClient.post(`/predict/integration/${id}`,{});
     return data;
   } catch (error) {
-     console.error(`Error fetching customer ${id}:`, error.response?.data || error.message);
+    //  console.error(`Error fetching customer ${id}:`, error.response?.data || error.message);
+    throw error;
+  }
+};
+export const fetchCustomerHistoryById = async (id) => {
+  try {
+    const { data } = await apiClient.get(`/predict/${id}`, {
+      params: {
+        size: 20,              // Traer 20 registros
+        page: 0,               // Primera página
+        sort: 'predictedAt,desc' // De más reciente a más antiguo
+      }
+    });
+    return data;
+  } catch (error) {
+    // console.error(`Error fetching customer ${id}:`, error.response?.data || error.message);
     throw error;
   }
 };
@@ -28,7 +43,7 @@ export const fetchDashboardData = async () => {
     const { data } = await apiClient.post('/predict/integration/batch/pro/all', {})
     return data
   } catch (error) {
-    console.error(`Error fetching Dashboard:`, error.response?.data || error.message);
+    // console.error(`Error fetching Dashboard:`, error.response?.data || error.message);
     throw error
   }
 }

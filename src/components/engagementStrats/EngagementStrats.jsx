@@ -2,8 +2,8 @@
 import EngagementStrat from "../engagementStrat/EngagementStrat";
 import useCustomerPredict from "../../hooks/useCustomerPredict";
 
-export default function EngagementStrats({debouncedTerm}) {
-  const { data, isError } = useCustomerPredict(debouncedTerm);
+export default function EngagementStrats({debouncedTerm,customer={}}) {
+  const { data, isError } = useCustomerPredict(debouncedTerm,customer);
 
 
   if (isError || !data?.aiInsight) return null;

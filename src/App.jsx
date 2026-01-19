@@ -12,6 +12,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { AuthProvider, RequireAuth, RequireAdmin } from "./auth/auth";
 import Login from "./layout/login/login";
 import AccessibilityToolbar from "./components/a11y/AccessibilityToolbar.jsx";
+import SearchHistoryScreen from "./layout/searchHistoryScreen/SearchHistoryScreen.jsx";
 
 
 
@@ -44,6 +45,7 @@ function App() {
             {/* SOLO ADMIN */}
             <Route element={<RequireAdmin />}>
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="searchHistory" element={<SearchHistoryScreen />} />
             </Route>
           </Route>
 

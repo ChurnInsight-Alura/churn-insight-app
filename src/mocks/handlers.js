@@ -109,10 +109,23 @@ export const handlers = [
       predictions: []
     });
   }),
-  http.post("*/integration/:id", async ({ params }) => {
+  http.post("/integration/:id", async ({ params }) => {
     await delay(800);
     // Aquí devuelves tu JSON estructurado
     return HttpResponse.json(customer());
+  }),
+  http.get("/predict/:id", async ({ params }) => {
+    await delay(800);
+    // Aquí devuelves tu JSON estructurado
+    const numeroPredicciones = Math.floor(Math.random() * 100) + 1;
+    const predicciones = {};
+    predicciones.content = [];
+    for (let index = 0; index < numeroPredicciones; index++) {
+      predicciones.content.push(customer());
+    }
+    console.log(predicciones);
+    
+    return HttpResponse.json(predicciones);
   })
   
   ,
