@@ -88,6 +88,15 @@ export default function UserMenu({ setTerm, setTime }) {
             Dashboard
           </Link>
           )}
+          {user?.role === "admin" && (
+          <Link
+            className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors tracking-wider um-item"
+            to="/searchHistory"
+            onClick={handleNavigate}
+          >
+            Historial del cliente
+          </Link>
+          )}
 
 
           <Link
