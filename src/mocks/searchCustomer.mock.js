@@ -1,4 +1,14 @@
-
+const getRandomPastDate = (daysBack = 30) => {
+  const now = new Date();
+  const past = new Date();
+  
+  // Restamos una cantidad aleatoria de milisegundos basada en los días elegidos
+  past.setTime(now.getTime() - Math.random() * daysBack * 24 * 60 * 60 * 1000);
+  
+  // toISOString() devuelve: 2026-01-16T11:05:31.000Z
+  // .split('.')[0] quita los milisegundos y la Z
+  return past.toISOString().split('.')[0];
+};
 export function customer(){
   return {
       predictedProba: (Math.floor(Math.random() * 100) + 1),
@@ -6,6 +16,7 @@ export function customer(){
       customerSegment: "VIP",
       interventionPriority:
         (Math.floor(Math.random() * 10) + 1) % 2 === 0 ? "LOW" : "HIGH",
+      predictedAt:getRandomPastDate(200),
       aiInsight: {
         analisis_breve:
           "Cliente joven, inactivo, con poco tiempo de antiguedad (Tenure: 0) y con un balance en cuenta, pero sin productos contratados. Probablemente no percibe valor en el banco digital. ",

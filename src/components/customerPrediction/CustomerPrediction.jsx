@@ -11,12 +11,12 @@ import useCustomerPredict from "../../hooks/useCustomerPredict";
 //   return response.json;
 // }
 
-export default function CustomerPrediction({debouncedTerm}) {
-  const {isLoading,isFetched,data,error} = useCustomerPredict(debouncedTerm)
+export default function CustomerPrediction({debouncedTerm,customer = {}}) {
+  const {isLoading,isFetched,data,error} = useCustomerPredict(debouncedTerm,customer)
   
   return (
     <div className="w-full h-full flex items-center">
-      {(debouncedTerm || "").length === 0 && (
+      {/* {(debouncedTerm || "").length === 0 && (
         <div className="flex gap-2 items-center justify-center w-full">
           <div className="inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <svg
@@ -35,7 +35,7 @@ export default function CustomerPrediction({debouncedTerm}) {
           </div>
           <h1 className="text-2xl font-bold">Buscar cliente</h1>
         </div>
-      )}
+      )} */}
 
       {isLoading && !error && (
         <div className="flex items-center justify-center w-full">
