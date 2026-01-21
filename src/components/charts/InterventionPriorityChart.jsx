@@ -5,7 +5,7 @@ export function InterventionPriorityChart({ data = [] }) {
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 h-full">
-      <h3 className="text-lg font-semibold text-gray-900 mb-6">Intervención por Prioridad</h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-6">Prioridad de Intervencion</h3>
       <div className="space-y-4">
         {data.map((item, idx) => (
           <div key={idx}>

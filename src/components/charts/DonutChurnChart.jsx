@@ -53,11 +53,13 @@ export function DonutChurnChart({ data = {} }) {
       <div className="flex gap-6 mt-6 text-sm">
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#007789' }}></div>
-          <span className="text-gray-700">Retienen: €{(DonutGreen / 1000).toFixed(1)}K</span>
+          {/* <span className="text-gray-700">Retienen: €{(DonutGreen / 1000).toFixed(1)}K</span> */}
+          <span className="text-gray-700">Retenidos: {DonutGreen}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#ff7b00' }}></div>
-          <span className="text-gray-700">Churners: €{(DonutRed / 1000).toFixed(1)}K</span>
+          {/* <span className="text-gray-700">Churners: €{(DonutRed / 1000).toFixed(1)}K</span> */}
+          <span className="text-gray-700">Churners: {DonutRed}</span>
         </div>
       </div>
     </div>

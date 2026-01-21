@@ -3,19 +3,6 @@ import useCustomerPredictHistory from "../../hooks/useCustomerPredictHistory";
 import CustomerPrediction from "../../components/customerPrediction/CustomerPrediction";
 import EngagementStrats from "../../components/engagementStrats/EngagementStrats";
 
-
-const formatDate = (dateString) => {
-  if (!dateString) return "Sin fecha";
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat('es-ES', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-    // Si quieres incluir la hora, descomenta la siguiente línea:
-    // hour: '2-digit', minute: '2-digit'
-  }).format(date);
-};
-
 export default function SearchHistoryScreen() {
   const [search, setSearch] = useState("");
   const [expandedId, setExpandedId] = useState(null); // Control de colapso
@@ -71,8 +58,8 @@ export default function SearchHistoryScreen() {
       {/* ESTADO: SIN RESULTADOS */}
       {isFetched && content.length === 0 && !isLoading && (
         <div className="bg-white/50 border border-dashed border-slate-300 rounded-2xl p-12 text-center">
-          <h2 className="text-xl font-bold text-slate-400">No se encontraron clientes con ese criterio</h2>
-          <p className="text-slate-500">Intenta con otro nombre o revisa el ID.</p>
+          <h2 className="text-xl font-bold text-slate-400">No se encontraron predicciones para este cliente</h2>
+          <p className="text-slate-500">Intenta con otro ID</p>
         </div>
       )}
 
