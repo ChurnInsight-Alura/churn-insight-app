@@ -5,7 +5,7 @@ import Home from "./layout/home/Home";
 import Header from "./components/header/Header";
 import VerticalHeader from "./components/verticalHeader/VerticalHeader";
 import Dashboard from "@/layout/dashboard/Dashboard";
-import SearchScreen from "./layout/searchScreen/searchScreen";
+import SearchScreen from "./layout/searchScreen/SearchScreen";
 import Profile from "./layout/profile/Profile";
 
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
@@ -14,12 +14,9 @@ import Login from "./layout/login/login";
 import AccessibilityToolbar from "./components/a11y/AccessibilityToolbar.jsx";
 import SearchHistoryScreen from "./layout/searchHistoryScreen/SearchHistoryScreen.jsx";
 
-
-
 const queryClient = new QueryClient();
 
 function App() {
-  
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
@@ -48,7 +45,6 @@ function App() {
               <Route path="searchHistory" element={<SearchHistoryScreen />} />
             </Route>
           </Route>
-
 
           {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
